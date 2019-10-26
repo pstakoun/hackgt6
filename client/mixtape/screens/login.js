@@ -6,8 +6,7 @@ import {    SafeAreaView,
             Text,
             View ,
             Button,
-            Linking,
-            TouchableOpacity} from 'react-native'
+            Linking,} from 'react-native'
 
 export default class login extends React.Component {
   constructor(props) {

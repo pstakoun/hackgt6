@@ -52,7 +52,7 @@ const RootStack = createSwitchNavigator(  {
     },
   },
   {
-    initialRouteName: 'Main'
+    initialRouteName: 'Loading'
   });
 
 const AppContainer = createAppContainer(RootStack);
