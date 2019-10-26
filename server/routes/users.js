@@ -120,7 +120,6 @@ router.get('/me/top/tracks', (req, res) => {
 });
 
 
-
 router.get('/me/values', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -135,7 +134,7 @@ router.post('/me/playlist/', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    const opts = { name : "playlisting", public: false, collaborative: true };
+    const opts = { name: 'playlisting', public: false, collaborative: true };
     spotify.createPlaylist(req.user, opts, (err, body) => {
       res.json(body);
     });
