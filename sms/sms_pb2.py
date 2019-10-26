@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='hackgt6',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\tsms.proto\x12\x07hackgt6\x1a\x1fgoogle/protobuf/timestamp.proto\"J\n\x0bGroupInvite\x12\x13\n\x0bplaylist_id\x18\x01 \x01(\t\x12\x0c\n\x04\x62ody\x18\x02 \x01(\t\x12\x18\n\x10invite_phone_num\x18\x03 \x03(\t\"O\n\x0bInviteToken\x12\x10\n\x08token_id\x18\x01 \x01(\t\x12.\n\nexpiration\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp2M\n\nSMSService\x12?\n\x11\x43reateGroupInvite\x12\x14.hackgt6.GroupInvite\x1a\x14.hackgt6.InviteTokenb\x06proto3')
+  serialized_pb=_b('\n\tsms.proto\x12\x07hackgt6\x1a\x1fgoogle/protobuf/timestamp.proto\"5\n\x0bGroupInvite\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\x12\x18\n\x10invite_phone_num\x18\x02 \x03(\t\"O\n\x0bInviteToken\x12\x10\n\x08token_id\x18\x01 \x01(\t\x12.\n\nexpiration\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp2M\n\nSMSService\x12?\n\x11\x43reateGroupInvite\x12\x14.hackgt6.GroupInvite\x1a\x14.hackgt6.InviteTokenb\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -36,22 +36,15 @@ _GROUPINVITE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='playlist_id', full_name='hackgt6.GroupInvite.playlist_id', index=0,
+      name='body', full_name='hackgt6.GroupInvite.body', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='body', full_name='hackgt6.GroupInvite.body', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='invite_phone_num', full_name='hackgt6.GroupInvite.invite_phone_num', index=2,
-      number=3, type=9, cpp_type=9, label=3,
+      name='invite_phone_num', full_name='hackgt6.GroupInvite.invite_phone_num', index=1,
+      number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -69,7 +62,7 @@ _GROUPINVITE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=55,
-  serialized_end=129,
+  serialized_end=108,
 )
 
 
@@ -106,8 +99,8 @@ _INVITETOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=131,
-  serialized_end=210,
+  serialized_start=110,
+  serialized_end=189,
 )
 
 _INVITETOKEN.fields_by_name['expiration'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
@@ -137,8 +130,8 @@ _SMSSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=212,
-  serialized_end=289,
+  serialized_start=191,
+  serialized_end=268,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateGroupInvite',

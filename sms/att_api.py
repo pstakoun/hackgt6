@@ -18,13 +18,13 @@ refresh_token = ''
 def get_access_token():
     """This also returns expires_in"""
     response = requests.post('https://api.att.com/oauth/v4/token',
-                  headers={'Accept': 'application/json'},
-                  data={
-                    'client_id': f'{APP_KEY}',
-                    'client_secret': f'{APP_SECRET}',
-                    'grant_type': 'client_credentials',
-                    'scope': f'{API_SCOPES}'
-                })
+                             headers={'Accept': 'application/json'},
+                             data={
+                                 'client_id': f'{APP_KEY}',
+                                 'client_secret': f'{APP_SECRET}',
+                                 'grant_type': 'client_credentials',
+                                 'scope': f'{API_SCOPES}'
+                             })
     json_response = response.json()
     global access_token
     access_token = json_response.access_token
@@ -33,6 +33,8 @@ def get_access_token():
 
 
 def send_message(phone_number, message):
+    if not access_token:
+        get_access_token()
     response = requests.post('https://api.att.com/sms/v3/messaging/outbox',
                              headers={'Accept': 'application/json',
                                       'Content-Type': 'application/json',
@@ -41,4 +43,4 @@ def send_message(phone_number, message):
                                  'address': phone_number,
                                  'message': message
                              }}
-                            )
+                             )

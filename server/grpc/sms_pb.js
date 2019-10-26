@@ -38,7 +38,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.hackgt6.GroupInvite.repeatedFields_ = [3];
+proto.hackgt6.GroupInvite.repeatedFields_ = [2];
 
 
 
@@ -69,9 +69,8 @@ proto.hackgt6.GroupInvite.prototype.toObject = function(opt_includeInstance) {
  */
 proto.hackgt6.GroupInvite.toObject = function(includeInstance, msg) {
   var f, obj = {
-    playlistId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    body: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    invitePhoneNumList: jspb.Message.getRepeatedField(msg, 3)
+    body: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    invitePhoneNumList: jspb.Message.getRepeatedField(msg, 2)
   };
 
   if (includeInstance) {
@@ -110,13 +109,9 @@ proto.hackgt6.GroupInvite.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPlaylistId(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
       msg.setBody(value);
       break;
-    case 3:
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.addInvitePhoneNum(value);
       break;
@@ -149,24 +144,17 @@ proto.hackgt6.GroupInvite.prototype.serializeBinary = function() {
  */
 proto.hackgt6.GroupInvite.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getPlaylistId();
+  f = message.getBody();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getBody();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getInvitePhoneNumList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      3,
+      2,
       f
     );
   }
@@ -174,47 +162,32 @@ proto.hackgt6.GroupInvite.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string playlist_id = 1;
+ * optional string body = 1;
  * @return {string}
  */
-proto.hackgt6.GroupInvite.prototype.getPlaylistId = function() {
+proto.hackgt6.GroupInvite.prototype.getBody = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /** @param {string} value */
-proto.hackgt6.GroupInvite.prototype.setPlaylistId = function(value) {
+proto.hackgt6.GroupInvite.prototype.setBody = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string body = 2;
- * @return {string}
- */
-proto.hackgt6.GroupInvite.prototype.getBody = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/** @param {string} value */
-proto.hackgt6.GroupInvite.prototype.setBody = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * repeated string invite_phone_num = 3;
+ * repeated string invite_phone_num = 2;
  * @return {!Array<string>}
  */
 proto.hackgt6.GroupInvite.prototype.getInvitePhoneNumList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
 
 /** @param {!Array<string>} value */
 proto.hackgt6.GroupInvite.prototype.setInvitePhoneNumList = function(value) {
-  jspb.Message.setField(this, 3, value || []);
+  jspb.Message.setField(this, 2, value || []);
 };
 
 
@@ -223,7 +196,7 @@ proto.hackgt6.GroupInvite.prototype.setInvitePhoneNumList = function(value) {
  * @param {number=} opt_index
  */
 proto.hackgt6.GroupInvite.prototype.addInvitePhoneNum = function(value, opt_index) {
-  jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+  jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
 

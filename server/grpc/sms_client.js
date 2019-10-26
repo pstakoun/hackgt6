@@ -19,11 +19,10 @@ function initGRPC() {
  * @param messageBodyContent
  * @param phoneNumberList
  */
-function createGroupInvite(playlistId, messageBodyContent, phoneNumberList) {
+function createGroupInvite(messageBodyContent, phoneNumberList) {
   const request = new messages.GroupInvite();
   request.setInvitePhoneNumList(phoneNumberList);
   request.setBody(messageBodyContent);
-  request.setPlaylistId(playlistId);
   client.createGroupInvite(request, (err, response) => {
     // right now the response is not being handled.
     // TODO(Drake): Actually fucking implement it.
@@ -32,3 +31,4 @@ function createGroupInvite(playlistId, messageBodyContent, phoneNumberList) {
 }
 
 initGRPC();
+createGroupInvite('fuk', ['1', '2']);
