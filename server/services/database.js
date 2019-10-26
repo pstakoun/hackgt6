@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const Group = require('../models/group');
 
 mongoose.connect('mongodb+srv://hackUser:hackpassword@cluster0-cixj1.gcp.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -30,7 +31,14 @@ const getUser = (id, done) => {
   });
 };
 
+const createGroup = (userId, done) => {
+  Group.create({ owner: userId }, (err, group) => {
+    done(err, group);
+  });
+};
+
 exports.createUserSpotify = createUserSpotify;
 exports.getUserSpotify = getUserSpotify;
 exports.setUserSpotifyAuthCode = setUserSpotifyAuthCode;
 exports.getUser = getUser;
+exports.createGroup = createGroup;
