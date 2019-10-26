@@ -194,7 +194,6 @@
 				0588E51739075A0B0CF6FCA0 /* Pods-mixtapeTests.debug.xcconfig */,
 				7FB5EC9E4E396DDA7862D94C /* Pods-mixtapeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,6 +307,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

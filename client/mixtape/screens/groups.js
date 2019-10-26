@@ -2,7 +2,7 @@
 import React, {Fragment} from 'react'
 import {   SafeAreaView,
   StyleSheet, Platform,   StatusBar,
-  Switch, Text, View , Button} from 'react-native'
+  Switch, Text, View , Button, Linking} from 'react-native'
 
 export default class groups extends React.Component {
   constructor(props) {
