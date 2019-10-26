@@ -116,4 +116,66 @@ router.get('/me/top/tracks', (req, res) => {
   }
 });
 
+router.get('/me/recommendations', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getTopTracks(req.user, (err, body) => {
+      const dat = JSON.parse(body);
+      /*for (var prop in dat) {
+      console.log("Key:" + prop);
+        console.log("Value:" + dat[prop]);
+      }
+      console.log(dat['items']['0']['name']);*/
+      seed_tracks = [];
+
+      for (var i = 0; i < 5; i++) {
+          seed_tracks.push(dat['items'][i]['id']);
+      }
+      var into = { 'seed_tracks' : seed_tracks };
+      spotify.getRecommendations(req.user, (err, into) => {
+        const data2 = JSON.parse(into);
+        for (var i = 0; i < 5; i++) {
+            seed_tracks.push(dat['items'][i]['id']);
+        }
+        res.json(into);
+      });
+    });
+  }
+});
+
+
+router.get('/me/values', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getValues(req.user, (err, body) => {
+      res.json(body);
+    });
+  }
+});
+
+/*
+router.get('/me/recommendations', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    //spotify.getTopTracks(req.user, (err, bodyA) => {
+      spotify.getRecommendations(req.user, (err, bodyB) => {
+        res.json(bodyB);
+      });
+    //});
+  }
+});*/
+
+router.post('/group/top/tracks', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getTopTracks(req.user, (err, body) => {
+      res.json(body);
+    });
+  }
+});
+
 module.exports = router;
