@@ -44,7 +44,8 @@ router.get('/join/:token', (req, res) => {
     res.status(404).send({ message: 'fuck off cunt' });
   }
   const invite = invites[req.params.token];
-  // TODO
+  // TODO create user via spotify
+  // TODO add user to group
 });
 
 module.exports = router;
