@@ -1,2 +1,6 @@
 .idea
 *.iml
+*~
+.DS_Store
+sms/__pycache__
+sms/__pycache__/att_api.cpython-37.pyc
