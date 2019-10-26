@@ -80,7 +80,7 @@ const createPlaylist = (user, options, done) => {
 };
 
 
-//TODO!!
+// TODO!!
 const addToPlaylist = (group, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
