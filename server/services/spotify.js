@@ -6,7 +6,7 @@ const redirectUri = 'http://localhost:3000/users/auth/spotify/callback';
 
 const getToken = (user, done) => {
   if (user.spotifyAccessToken) {
-    done(null, { token: user.spotifyAccessToken });
+    done(null, { access_token: user.spotifyAccessToken });
     return;
   }
   // TODO probably doesn't work
@@ -29,7 +29,7 @@ const getMe = (user, done) => {
   getToken(user, (err, body) => {
     request.get('https://api.spotify.com/v1/me', {
       headers: {
-        Authorization: `Bearer ${body.token}`,
+        Authorization: `Bearer ${body.access_token}`,
       },
     }, (err, res, body) => {
       console.log(body);

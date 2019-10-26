@@ -1,20 +1,27 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const Group = require('../models/group');
+const GroupPlaylist = require('../models/group-playlist');
 
 mongoose.connect('mongodb+srv://hackUser:hackpassword@cluster0-cixj1.gcp.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-const createUserSpotify = (profile, done) => {
-  User.create({ spotifyId: profile.id }, (err, user) => {
+const getUser = (id, done) => {
+  User.findById(id, (err, user) => {
     done(err, user);
   });
 };
 
 const getUserSpotify = (id, done) => {
   User.findOne({ spotifyId: id }, (err, user) => {
+    done(err, user);
+  });
+};
+
+const createUserSpotify = (profile, done) => {
+  User.create({ spotifyId: profile.id }, (err, user) => {
     done(err, user);
   });
 };
@@ -28,12 +35,6 @@ const setUserSpotifyAuthCode = (id, code, done) => {
 const updateUserTokensSpotify = (profile, access, refresh, done) => {
   User.updateOne({ spotifyId: profile.id }, { spotifyAccessToken: access, spotifyRefreshToken: refresh }, (err, res) => {
     done(err, res);
-  });
-};
-
-const getUser = (id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
   });
 };
 
@@ -54,17 +55,41 @@ const createGroup = (userId, done) => {
     if (err) {
       done(err, group);
     } else {
-      User.updateOne({ _id: userId }, { $push: { groups: group._id } }, (err, user) => {
+      User.updateOne({ _id: userId }, { $push: { groups: group._id } }, (err, res) => {
         done(err, group);
       });
     }
   });
 };
 
-exports.createUserSpotify = createUserSpotify;
+const getGroupPlaylists = (groupId, done) => {
+  GroupPlaylist.find({ group: groupId }, (err, groupPlaylists) => {
+    if (err) {
+      done(err, null);
+    } else {
+      done(err, groupPlaylists);
+    }
+  });
+};
+
+const createGroupPlaylist = (groupId, done) => {
+  GroupPlaylist.create({ group: groupId }, (err, groupPlaylist) => {
+    if (err) {
+      done(err, null);
+    } else {
+      Group.updateOne({ _id: groupId }, { $push: { playlists: groupPlaylist._id } }, (err, res) => {
+        done(err, groupPlaylist);
+      });
+    }
+  });
+};
+
+exports.getUser = getUser;
 exports.getUserSpotify = getUserSpotify;
+exports.createUserSpotify = createUserSpotify;
 exports.setUserSpotifyAuthCode = setUserSpotifyAuthCode;
 exports.updateUserTokensSpotify = updateUserTokensSpotify;
-exports.getUser = getUser;
 exports.getGroups = getGroups;
 exports.createGroup = createGroup;
+exports.getGroupPlaylists = getGroupPlaylists;
+exports.createGroupPlaylist = createGroupPlaylist;

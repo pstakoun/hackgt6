@@ -90,13 +90,4 @@ router.get('/logout', (req, res) => {
   res.json({ success: true });
 });
 
-router.get('/playlists', (req, res) => {
-  if (!req.user) {
-    res.json({ error: 'Not authorized' });
-  } else {
-    console.log(req.user);
-    res.json(spotify.createPlaylist('test', req.user));
-  }
-});
-
 module.exports = router;

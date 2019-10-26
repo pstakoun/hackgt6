@@ -4,6 +4,9 @@ const GroupSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  playlists: {
+    type: [String],
+  },
 });
 
 const Group = mongoose.model('Group', GroupSchema);
