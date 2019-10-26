@@ -1,64 +1,56 @@
-import React from 'react'
-
-import {
+import React from 'react';
+import {Text,
+  FlatList,
   View,
-  Text,
-  Image,
-  Button,
-  StyleSheet
-} from 'react-native';
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { Icon } from 'react-native-elements';
+import global from '../style/global'
 
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-
-class GroupItem extends React.Component {
-
+export default class GroupItem extends React.Component {
   constructor(props) {
-    super(props);
-  }
-
-  onPress() {
-    this.props.navigation.navigate('DetailScreen')
+    super(props)
   }
 
   render() {
     return (
-      <TouchableOpacity onPress={this.onPress.bind(this)} style={[styles.card, GlobalStyle.shadow]}>
-        <View style={styles.labels}>
-          <Text style={[styles.title, GlobalStyle.fontStyles]}>Harvest</Text>
-          <Text style={[styles.subtitle, GlobalStyle.fontStyles]}>Learn how to harvest your plant</Text>
+      <TouchableOpacity onPress= {() => this.props.navigation.navigate('CurGroup')}>
+        <View style={[styles.itemWrapper, global.backColor]}>
+          <View>
+            <Text style={[styles.itemTitle, global.fontColor]}>{this.props.title}</Text>
+            <Text style={[styles.itemNote, global.fontColor]}>{this.props.mood}</Text>
+          </View>
+          <View style={styles.chevronWrapper}>
+            <Icon name='chevron-right' type={'evilicon'} size={40} color={'white'}/>
+          </View>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    width: 30,
-    height: 30,
-    margin: 10,
-  },
-  card: {
-    margin: 10,
-    borderRadius: 10,
-    backgroundColor: '#ffffff',
+  itemWrapper: {
+    paddingHorizontal: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
     flexDirection: 'row',
-    alignItems: 'center'
   },
-  labels: {
-    flexDirection: 'column',
-    margin: 5,
-  },
-  title: {
-    fontSize: 15,
-  },
-  subtitle: {
-    fontSize: 10,
-  },
-  arrow: {
 
-  }
-})
+  itemTitle: {
+    fontSize: 23,
+    fontWeight: 'bold',
+  },
 
-export default GroupItem
+  itemNote: {
+    fontSize: 13,
+  },
+
+  chevronWrapper: {
+    right: 30,
+    position: 'absolute',
+    marginTop: 20,
+  },
+});
+

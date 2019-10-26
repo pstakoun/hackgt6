@@ -8,8 +8,15 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
   },
-  fontStyles: {
-    color: '#4B4B4B',
+  fontColor: {
+    color: 'white',
+  },
+  backColor: {
+    backgroundColor: '#2F2F2F',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#2F2F2F',
   },
   shadow: {
     shadowColor: 'black',
