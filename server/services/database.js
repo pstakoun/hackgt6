@@ -72,6 +72,12 @@ const getGroupPlaylists = (groupId, done) => {
   });
 };
 
+const getGroupPlaylist = (id, done) => {
+  GroupPlaylist.findById(id, (err, groupPlaylist) => {
+    done(err, groupPlaylist);
+  });
+};
+
 const createGroupPlaylist = (groupId, done) => {
   GroupPlaylist.create({ group: groupId }, (err, groupPlaylist) => {
     if (err) {
@@ -102,5 +108,6 @@ exports.updateUserTokensSpotify = updateUserTokensSpotify;
 exports.getGroups = getGroups;
 exports.createGroup = createGroup;
 exports.getGroupPlaylists = getGroupPlaylists;
+exports.getGroupPlaylist = getGroupPlaylist;
 exports.createGroupPlaylist = createGroupPlaylist;
 exports.findUsersInGroup = findUsersInGroup;
