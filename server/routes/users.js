@@ -120,7 +120,6 @@ router.get('/me/top/tracks', (req, res) => {
 });
 
 
-
 router.get('/me/values', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -135,10 +134,30 @@ router.post('/me/playlist/', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    const opts = { name : "playlisting", public: false, collaborative: true };
+    const opts = { name: 'playlisting', public: false, collaborative: true };
     spotify.createPlaylist(req.user, opts, (err, body) => {
       res.json(body);
     });
   }
 });
+
+
+router.get('/me/recommendations', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    grouping.getValues(req.user, (err, body) => {
+      console.log(body);
+      const opt = { seed_artists: '', seed_genres: '', seed_tracks: [] };
+      for (let i = 0; i < 5; i++) {
+        opt.seed_tracks.push(body.tracks[i]);
+      }
+      opt.seed_tracks = opt.seed_tracks.join(',');
+      spotify.getRecommendations(req.user, opt, (err, body) => {
+        res.json(body);
+      });
+    });
+  }
+});
+
 module.exports = router;

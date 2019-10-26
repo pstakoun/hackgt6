@@ -6,7 +6,7 @@ const getValues = (user, done) => {
   const userArtists = [];
   const userTracks = [];
   const genres = [];
-  const out = 'name';
+  const out = 'id';
   const option = { limit: 50 };
   spotify.getTopArtists(user, option, (err, body) => {
     const cur = JSON.parse(body);
@@ -14,7 +14,7 @@ const getValues = (user, done) => {
       userArtists.push(cur.items[i][out]);
       for (let j = 0; j < cur.items[i].genres.length; j++) {
         const genre = cur.items[i].genres[j];
-        if (genres.indexOf(genre) == -1) {
+        if (genres.indexOf(genre) === -1) {
           genres.push(genre);
         }
       }
@@ -26,7 +26,7 @@ const getValues = (user, done) => {
         for (let j = 0; j < cur.items[i].album.artists.length; j++) {
           const artist = cur.items[i].album.artists[j][out];
           //  console.log(cur['items'][i]['album']['artists'][j])
-          if (userArtists.indexOf(artist) == -1) {
+          if (userArtists.indexOf(artist) === -1) {
             userArtists.push(artist);
           }
         }
@@ -37,9 +37,11 @@ const getValues = (user, done) => {
       /* console.log(userArtists);
           console.log(userTracks); */
 
-      const finished = { artists: userArtists, tracks: userArtists, genres };
+      const finished = { artists: userArtists, tracks: userTracks, genres };
       done(err, finished);
     });
   });
 };
+
+
 exports.getValues = getValues;
