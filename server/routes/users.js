@@ -78,7 +78,7 @@ router.get('/playlists', (req, res) => {
   if (!req.user) {
     res.json({ error: 'notAuthed.' });
   } else {
-    console.log(user)
+    console.log(req.user)
     res.json(spotify.createPlaylist('mmyname', req.user));
   }
 });
