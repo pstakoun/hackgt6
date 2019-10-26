@@ -32,10 +32,35 @@ const getMe = (user, done) => {
         Authorization: `Bearer ${body.access_token}`,
       },
     }, (err, res, body) => {
-      console.log(body);
+      done(err, body);
+    });
+  });
+};
+
+const getTopArtists = (user, done) => {
+  getToken(user, (err, body) => {
+    request.get('https://api.spotify.com/v1/me/top/artists', {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+
+const getTopTracks = (user, done) => {
+  getToken(user, (err, body) => {
+    request.get('https://api.spotify.com/v1/me/top/tracks', {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
       done(err, body);
     });
   });
 };
 
 exports.getMe = getMe;
+exports.getTopArtists = getTopArtists;
+exports.getTopTracks = getTopTracks;
