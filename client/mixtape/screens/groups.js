@@ -2,7 +2,7 @@
 import React, {Fragment} from 'react'
 import {   SafeAreaView,
   StyleSheet, Platform,   StatusBar,
-  Switch, Text, View , Button, TextInput} from 'react-native'
+  Switch, Text, View , Button, TextInput, Alert} from 'react-native'
 import GropuItem from '../components/groupItem'
 import global from '../style/global'
 
@@ -12,9 +12,17 @@ export default class groups extends React.Component {
 
   }
 
-  static navigationOptions = {
-    title: 'Groups'
-
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title:'Groups',
+      headerRight: () => (
+        <Button
+          onPress={navigation.getParam('makeGroup')}
+          title="+"
+          color="#007bff"
+        />
+      ),
+    };
   };
 
   componentDidMount() {
@@ -22,7 +30,28 @@ export default class groups extends React.Component {
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch(error => console.log(error.message));
+    this.props.navigation.setParams({ makeGroup: this._makeGroup });
   }
+
+  _makeGroup = () => {
+    Alert.prompt(
+      'Create Group', null, (text) => (
+        fetch('http://localhost:3000/groups', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          //edit this to choose what data you want in new group (the name and members are both in state)
+          body: JSON.stringify({name: text}),
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .then(() => this.props.navigation.navigate('Main'))
+          .catch(error => console.log(error.message))
+      )
+    );
+  };
 
   render() {
 
@@ -32,7 +61,6 @@ export default class groups extends React.Component {
         <SafeAreaView>
           <View>
             <GropuItem id={'1234abcd'} title={"Apes"} mood={"Crazy"} navigation={this.props.navigation}/>
-            <Button title={'Add Group'} onPress={() => this.props.navigation.navigate("NewGroup")}></Button>
           </View>
         </SafeAreaView>
       </View>

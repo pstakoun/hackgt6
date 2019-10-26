@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4da1553-a174-4774-90a2-0a16b169ce41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mixtape/=" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mixtape/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mixtape/components/groupItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/components/groupItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/ios/mixtape.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/ios/mixtape.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/curGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/curGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mixtape/screens/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/groups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/newGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/newGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mixtape/screens/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -43,23 +38,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="5951" />
+          <entry key="js" value="6244" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="5951" />
+          <entry key="JavaScript" value="6244" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mixtape/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="573">
-              <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
+              <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#234#269#0" expanded="true" />
@@ -71,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mixtape/screens/groups.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="340">
+              <caret line="50" column="53" lean-forward="true" selection-start-line="50" selection-start-column="53" selection-end-line="50" selection-end-column="53" />
               <folding>
                 <element signature="e#11#48#0" expanded="true" />
               </folding>
@@ -83,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
+            <state relative-caret-position="371">
+              <caret line="45" column="87" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="87" />
               <folding>
                 <element signature="e#11#48#0" expanded="true" />
               </folding>
@@ -92,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mixtape/components/groupItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+            <state relative-caret-position="345">
+              <caret line="23" column="46" lean-forward="true" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -116,8 +111,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mixtape/screens/newGroup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="38" column="7" lean-forward="true" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+            <state relative-caret-position="513">
+              <caret line="38" column="7" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="38" selection-end-column="7" />
               <folding>
                 <element signature="e#11#48#0" expanded="true" />
               </folding>
@@ -165,6 +160,7 @@
       <find>state</find>
       <find>fetch</find>
       <find>navigation</find>
+      <find>{</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,12 +173,12 @@
         <option value="$PROJECT_DIR$/mixtape/config.js" />
         <option value="$PROJECT_DIR$/mixtape/index.js" />
         <option value="$PROJECT_DIR$/mixtape/style/global.js" />
-        <option value="$PROJECT_DIR$/mixtape/screens/login.js" />
-        <option value="$PROJECT_DIR$/mixtape/components/groupItem.js" />
         <option value="$PROJECT_DIR$/mixtape/screens/curGroup.js" />
-        <option value="$PROJECT_DIR$/mixtape/screens/groups.js" />
         <option value="$PROJECT_DIR$/mixtape/screens/newGroup.js" />
         <option value="$PROJECT_DIR$/mixtape/App.js" />
+        <option value="$PROJECT_DIR$/mixtape/screens/groups.js" />
+        <option value="$PROJECT_DIR$/mixtape/screens/login.js" />
+        <option value="$PROJECT_DIR$/mixtape/components/groupItem.js" />
       </list>
     </option>
   </component>
@@ -281,7 +277,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27284000" />
+    <option name="totallyTimeSpent" value="29401000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -329,13 +325,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mixtape/screens/webauth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/mixtape/screens/webauth.js" />
     <entry file="file://$PROJECT_DIR$/mixtape/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -350,26 +340,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-          <folding>
-            <element signature="e#11#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mixtape/components/groupItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mixtape/screens/curGroup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="537">
@@ -380,33 +350,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mixtape/screens/groups.js">
+    <entry file="file://$PROJECT_DIR$/mixtape/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="573">
+          <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
           <folding>
-            <element signature="e#11#48#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#234#269#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mixtape/screens/newGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="38" column="7" lean-forward="true" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+        <state relative-caret-position="513">
+          <caret line="38" column="7" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="38" selection-end-column="7" />
           <folding>
             <element signature="e#11#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mixtape/App.js">
+    <entry file="file://$PROJECT_DIR$/mixtape/screens/groups.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
+        <state relative-caret-position="340">
+          <caret line="50" column="53" lean-forward="true" selection-start-line="50" selection-start-column="53" selection-end-line="50" selection-end-column="53" />
+          <folding>
+            <element signature="e#11#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="45" column="87" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="87" />
+          <folding>
+            <element signature="e#11#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mixtape/components/groupItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="46" lean-forward="true" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#234#269#0" expanded="true" />
           </folding>
         </state>
       </provider>

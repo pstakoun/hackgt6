@@ -43,7 +43,7 @@ export default class login extends React.Component {
     fetch('http://localhost:3000/users/auth/spotify/authorize?code=' + code)
       .then((response) => response.json())
       .then((data) => console.log(data))
-      .then(() => this.props.navigation.navigate('Main'))
+      .then(() => this.props.navigation.navigate('CurGroup', {id: data._id, first: true}))
       .catch(error => console.log(error.message));
   }
 
