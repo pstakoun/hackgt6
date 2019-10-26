@@ -15,7 +15,15 @@ passport.use(
       callbackURL: 'http://localhost:3000/users/auth/spotify/callback',
     },
     ((accessToken, refreshToken, expires_in, profile, done) => {
-      database.createUserSpotify(profile, done);
+      database.getUserSpotify(profile.id, (err, user) => {
+        if (!user) {
+          database.createUserSpotify(profile, done);
+        } else {
+          database.updateUserTokensSpotify(profile, accessToken, refreshToken, (err, res) => {
+            done(err, user);
+          });
+        }
+      });
     }),
   ),
 );
@@ -35,8 +43,8 @@ router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 router.get('/auth/spotify', passport.authenticate('spotify',
   {
     scope: ['user-read-email', 'user-read-private', 'playlist-modify-private', 'playlist-modify-public', 'playlist-read-collaborative', 'playlist-read-private',
-  ] /*,
-    showDialog: true,*/
+    ], /* ,
+    showDialog: true, */
   }), (req, res) => {
 });
 
@@ -71,16 +79,23 @@ router.get('/me', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    res.json(spotify.getMe(req.user));
+    spotify.getMe(req.user, (err, body) => {
+      res.json(body);
+    });
   }
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.json({ success: true });
 });
 
 router.get('/playlists', (req, res) => {
   if (!req.user) {
-    res.json({ error: 'notAuthed.' });
+    res.json({ error: 'Not authorized' });
   } else {
-    console.log(req.user)
-    res.json(spotify.createPlaylist('mmyname', req.user));
+    console.log(req.user);
+    res.json(spotify.createPlaylist('test', req.user));
   }
 });
 

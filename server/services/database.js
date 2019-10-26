@@ -25,6 +25,12 @@ const setUserSpotifyAuthCode = (id, code, done) => {
   });
 };
 
+const updateUserTokensSpotify = (profile, access, refresh, done) => {
+  User.updateOne({ spotifyId: profile.id }, { spotifyAccessToken: access, spotifyRefreshToken: refresh }, (err, res) => {
+    done(err, res);
+  });
+};
+
 const getUser = (id, done) => {
   User.findById(id, (err, user) => {
     done(err, user);
@@ -58,6 +64,7 @@ const createGroup = (userId, done) => {
 exports.createUserSpotify = createUserSpotify;
 exports.getUserSpotify = getUserSpotify;
 exports.setUserSpotifyAuthCode = setUserSpotifyAuthCode;
+exports.updateUserTokensSpotify = updateUserTokensSpotify;
 exports.getUser = getUser;
 exports.getGroups = getGroups;
 exports.createGroup = createGroup;

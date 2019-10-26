@@ -10,6 +10,12 @@ const UserSchema = new mongoose.Schema({
   spotifyAuthorizationCode: {
     type: String,
   },
+  spotifyAccessToken: {
+    type: String,
+  },
+  spotifyRefreshToken: {
+    type: String,
+  },
   groups: {
     type: [String],
   },

@@ -1,42 +1,41 @@
-const SpotifyWebApi = require('spotify-web-api-node');
+const request = require('request');
 
+const clientId = '1eaa04d6551348fa84e7966990e45aeb';
+const clientSecret = '77f351092ac34ba7af26b9311be33c16';
+const redirectUri = 'http://localhost:3000/users/auth/spotify/callback';
 
-const spotifyApi = new SpotifyWebApi({
-  clientId: '1eaa04d6551348fa84e7966990e45aeb',
-  clientSecret: '77f351092ac34ba7af26b9311be33c16',
-  redirectUri: 'http://localhost:3000/users/auth/spotify/callback',
-});
-
-const getMe = (user) => {
-  console.log(user);
-  return user;
+const getToken = (user, done) => {
+  if (user.spotifyAccessToken) {
+    done(null, { token: user.spotifyAccessToken });
+    return;
+  }
+  // TODO probably doesn't work
+  request.post({
+    url: 'https://accounts.spotify.com/api/token',
+    form: {
+      grant_type: 'authorization_code',
+      code: user.spotifyAuthorizationCode,
+      redirect_uri: redirectUri,
+    },
+    headers: {
+      Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
+    },
+  }, (err, res, body) => {
+    done(err, body);
+  });
 };
 
-const createPlaylist = (name, user) => {
-  spotifyApi.authorizationCodeGrant(user.spotifyAuthorizationCode)
-    .then((data) => {
-      console.log("test! ")
-      spotifyApi.setAccessToken(data.body.access_token);
-      return spotifyApi.createPlaylist(name, {'public' : false});
-    }).then((data) => {
-      console.log('Created playlist!');
-    }).catch((err) => {
-      console.log('Something went wrong!', err);
+const getMe = (user, done) => {
+  getToken(user, (err, body) => {
+    request.get('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: `Bearer ${body.token}`,
+      },
+    }, (err, res, body) => {
+      console.log(body);
+      done(err, body);
     });
+  });
 };
-
-// TODO MAKE THIS A post
-
-
-/*
-const createPlaylist = (user) => {
-
-}
-
-const getTracks
-
-*/
-
 
 exports.getMe = getMe;
-exports.createPlaylist = createPlaylist;
