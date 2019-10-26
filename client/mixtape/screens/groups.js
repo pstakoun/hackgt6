@@ -23,10 +23,9 @@ export default class groups extends React.Component {
       title:'Groups',
       headerRight: () => (
         <View>
-          <TouchableOpacity
-            onPress={navigation.getParam('makeGroup')}
-          />
+          <TouchableOpacity onPress={navigation.getParam('makeGroup')}>
             <Text style={{color: "#007bff", fontSize: 45, fontWeight: '200', marginRight: 20}}>+</Text>
+          </TouchableOpacity>
         </View>
       ),
     };
