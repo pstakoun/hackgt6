@@ -43,9 +43,6 @@ def send_message(phone_number, message):
     if not access_token:
         get_access_token()
 
-    print(user_id)
-
-
     response = requests.post(f'https://oauth-cpaas.att.com/cpaas/smsmessaging/v1/{user_id}/outbound/+14044580498/requests',
                              headers={'Content-Type': 'application/json',
                                       'Authorization': f'Bearer {access_token}'},
@@ -57,4 +54,3 @@ def send_message(phone_number, message):
                                  }
                              }},
                              )
-    print(response.json())
