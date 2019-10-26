@@ -12,25 +12,30 @@ from concurrent import futures
 
 
 def send_sms_request(body, phone_nums):
-    # Generates a unique ID for the invite code
-    invite_token = uuid.uuid4().hex[:8]
-
+    invites = []
     for phone_num in phone_nums:
+        # Generates a unique ID for the invite code
+        invite_token = uuid.uuid4().hex[:8]
+        # TODO(Drake): Eventually do this in a try catch for error handling
         att_api.send_message(phone_num, body + f'https://ape.ape/invite/${invite_token}')
-    return invite_token
+        invite_proto = sms_pb2.InviteToken(phone_number=phone_num, token_id=invite_token, expiration=generate_expiration())
+        invites.append(invite_proto)
+    return invites
+
+
+def generate_expiration():
+    """Generates the expiration date. Can be modified in the future to take a parameter.
+    Default for now will be 24 hours"""
+    tomorrow = datetime.now() + timedelta(hours=24)
+    timestamp = Timestamp()
+    return timestamp.FromDatetime(tomorrow)
 
 
 class SMSServer(sms_pb2_grpc.SMSServiceServicer):
     def CreateGroupInvite(self, request, context):
         """Handler for group invitation."""
-        token = send_sms_request(request.body, request.invite_phone_num)
-        tomorrow = datetime.now() + timedelta(hours=24)
-        timestamp = Timestamp()
-        timestamp.FromDatetime(tomorrow)
-        return sms_pb2.InviteToken(
-            token_id=token,
-            expiration=timestamp
-        )
+        invites = send_sms_request(request.body, request.invite_phone_num)
+        return sms_pb2.InviteResponse(invites=invites)
 
 
 def serve():
