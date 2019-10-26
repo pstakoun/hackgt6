@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4da1553-a174-4774-90a2-0a16b169ce41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mixtape/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/ios/mixtape.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/ios/mixtape.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/ios/mixtape/AppDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/ios/mixtape/AppDelegate.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/ios/mixtape/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/ios/mixtape/Images.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/ios/mixtape/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/ios/mixtape/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/groups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mixtape/screens/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/login.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -41,12 +33,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="1223" />
+          <entry key="js" value="1314" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="1223" />
+          <entry key="JavaScript" value="1314" />
         </counts>
       </usages-collector>
     </session>
@@ -56,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
+            <state relative-caret-position="145">
+              <caret line="36" column="66" selection-start-line="36" selection-start-column="66" selection-end-line="36" selection-end-column="66" />
               <folding>
                 <element signature="e#11#48#0" expanded="true" />
               </folding>
@@ -229,12 +221,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572052098807</updated>
-      <workItem from="1572052100078" duration="8481000" />
+      <workItem from="1572052100078" duration="8814000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8481000" />
+    <option name="totallyTimeSpent" value="8814000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -326,8 +318,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
+        <state relative-caret-position="145">
+          <caret line="36" column="66" selection-start-line="36" selection-start-column="66" selection-end-line="36" selection-end-column="66" />
           <folding>
             <element signature="e#11#48#0" expanded="true" />
           </folding>

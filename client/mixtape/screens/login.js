@@ -34,10 +34,10 @@ export default class login extends React.Component {
   }
 
   componentDidMount() {
-    Linking.addEventListener('url', this._handleOpenURL);
+    Linking.addEventListener('url', this._handleOpenURL.bind(this));
   }
   componentWillUnmount() {
-    Linking.removeEventListener('url', this._handleOpenURL);
+    Linking.removeEventListener('url', this._handleOpenURL.bind(this));
   }
   _handleOpenURL(event) {
     var code = event.url.split("code=")[1];
@@ -50,16 +50,8 @@ export default class login extends React.Component {
   }
 
   postAuthCode() {
-    fetch('localhost:3000/users/auth/spotify/authorize', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        code: this.state.authcode,
-      }),
-    });
+    fetch('localhost:3000/users/auth/spotify/callback?code=' + this.state.authcode)
+      .then((response) => console.log(response))
   }
 
   render() {
