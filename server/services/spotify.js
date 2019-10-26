@@ -38,9 +38,11 @@ const getMe = (user, done) => {
   });
 };
 
-const getTopArtists = (user, done) => {
+const getTopArtists = (user, options, done) => {
+  var opt = Object.keys(options).map(key => key + '=' + options[key]).join('&');
+
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/artists', {
+    request.get('https://api.spotify.com/v1/me/top/artists?' + opt, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -50,9 +52,10 @@ const getTopArtists = (user, done) => {
   });
 };
 
-const getTopTracks = (user, done) => {
+const getTopTracks = (user, options, done) => {
+  var opt = Object.keys(options).map(key => key + '=' + options[key]).join('&');
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/tracks', {
+    request.get('https://api.spotify.com/v1/me/top/tracks?'+opt, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
