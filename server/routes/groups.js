@@ -45,15 +45,6 @@ router.get('/:group/users', (req, res) => {
   }
 });
 
-router.post('/:group/invite', (req, res) => {
-  if (!req.user) {
-    res.json({ error: 'Not authorized' });
-  } else {
-    const { invites } = req.body;
-    // TODO invite users to group
-  }
-});
-
 router.get('/:group/playlists', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
