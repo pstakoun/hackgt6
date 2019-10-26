@@ -26,7 +26,11 @@ function createGroupInvite(messageBodyContent, phoneNumberList) {
   client.createGroupInvite(request, (err, response) => {
     // right now the response is not being handled.
     // TODO(Drake): Actually fucking implement it.
-    console.log(response.getTokenId());
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log(response.getInvitesList());
   });
 }
 

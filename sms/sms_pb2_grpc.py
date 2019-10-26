@@ -17,7 +17,7 @@ class SMSServiceStub(object):
     self.CreateGroupInvite = channel.unary_unary(
         '/hackgt6.SMSService/CreateGroupInvite',
         request_serializer=sms__pb2.GroupInvite.SerializeToString,
-        response_deserializer=sms__pb2.InviteToken.FromString,
+        response_deserializer=sms__pb2.InviteResponse.FromString,
         )
 
 
@@ -38,7 +38,7 @@ def add_SMSServiceServicer_to_server(servicer, server):
       'CreateGroupInvite': grpc.unary_unary_rpc_method_handler(
           servicer.CreateGroupInvite,
           request_deserializer=sms__pb2.GroupInvite.FromString,
-          response_serializer=sms__pb2.InviteToken.SerializeToString,
+          response_serializer=sms__pb2.InviteResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
