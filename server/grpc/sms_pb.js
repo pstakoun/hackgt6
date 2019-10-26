@@ -7,11 +7,13 @@
  */
 // GENERATED CODE -- DO NOT EDIT!
 
-var jspb = require('google-protobuf');
-var goog = jspb;
-var global = Function('return this')();
+const jspb = require('google-protobuf');
 
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+const goog = jspb;
+const global = Function('return this')();
+
+const google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.hackgt6.GroupInvite', null, global);
 goog.exportSymbol('proto.hackgt6.InviteResponse', null, global);
@@ -27,7 +29,7 @@ goog.exportSymbol('proto.hackgt6.InviteToken', null, global);
  * @extends {jspb.Message}
  * @constructor
  */
-proto.hackgt6.GroupInvite = function(opt_data) {
+proto.hackgt6.GroupInvite = function (opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, proto.hackgt6.GroupInvite.repeatedFields_, null);
 };
 goog.inherits(proto.hackgt6.GroupInvite, jspb.Message);
@@ -42,7 +44,6 @@ if (goog.DEBUG && !COMPILED) {
 proto.hackgt6.GroupInvite.repeatedFields_ = [2];
 
 
-
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
  * Creates an object representation of this proto suitable for use in Soy templates.
@@ -54,12 +55,12 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.hackgt6.GroupInvite.prototype.toObject = function(opt_includeInstance) {
-  return proto.hackgt6.GroupInvite.toObject(opt_includeInstance, this);
-};
+  proto.hackgt6.GroupInvite.prototype.toObject = function (opt_includeInstance) {
+    return proto.hackgt6.GroupInvite.toObject(opt_includeInstance, this);
+  };
 
 
-/**
+  /**
  * Static version of the {@see toObject} method.
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
@@ -68,17 +69,18 @@ proto.hackgt6.GroupInvite.prototype.toObject = function(opt_includeInstance) {
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.hackgt6.GroupInvite.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    body: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    invitePhoneNumList: jspb.Message.getRepeatedField(msg, 2)
-  };
+  proto.hackgt6.GroupInvite.toObject = function (includeInstance, msg) {
+    let f; const
+      obj = {
+        body: jspb.Message.getFieldWithDefault(msg, 1, ''),
+        invitePhoneNumList: jspb.Message.getRepeatedField(msg, 2),
+      };
 
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
+    if (includeInstance) {
+      obj.$jspbMessageInstance = msg;
+    }
+    return obj;
+  };
 }
 
 
@@ -87,9 +89,9 @@ proto.hackgt6.GroupInvite.toObject = function(includeInstance, msg) {
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.hackgt6.GroupInvite}
  */
-proto.hackgt6.GroupInvite.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.hackgt6.GroupInvite;
+proto.hackgt6.GroupInvite.deserializeBinary = function (bytes) {
+  const reader = new jspb.BinaryReader(bytes);
+  const msg = new proto.hackgt6.GroupInvite();
   return proto.hackgt6.GroupInvite.deserializeBinaryFromReader(msg, reader);
 };
 
@@ -101,24 +103,24 @@ proto.hackgt6.GroupInvite.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.hackgt6.GroupInvite}
  */
-proto.hackgt6.GroupInvite.deserializeBinaryFromReader = function(msg, reader) {
+proto.hackgt6.GroupInvite.deserializeBinaryFromReader = function (msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
-    var field = reader.getFieldNumber();
+    const field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setBody(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.addInvitePhoneNum(value);
-      break;
-    default:
-      reader.skipField();
-      break;
+      case 1:
+        var value = /** @type {string} */ (reader.readString());
+        msg.setBody(value);
+        break;
+      case 2:
+        var value = /** @type {string} */ (reader.readString());
+        msg.addInvitePhoneNum(value);
+        break;
+      default:
+        reader.skipField();
+        break;
     }
   }
   return msg;
@@ -129,8 +131,8 @@ proto.hackgt6.GroupInvite.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.hackgt6.GroupInvite.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
+proto.hackgt6.GroupInvite.prototype.serializeBinary = function () {
+  const writer = new jspb.BinaryWriter();
   proto.hackgt6.GroupInvite.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
@@ -143,20 +145,20 @@ proto.hackgt6.GroupInvite.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.hackgt6.GroupInvite.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
+proto.hackgt6.GroupInvite.serializeBinaryToWriter = function (message, writer) {
+  let f;
   f = message.getBody();
   if (f.length > 0) {
     writer.writeString(
       1,
-      f
+      f,
     );
   }
   f = message.getInvitePhoneNumList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       2,
-      f
+      f,
     );
   }
 };
@@ -166,13 +168,13 @@ proto.hackgt6.GroupInvite.serializeBinaryToWriter = function(message, writer) {
  * optional string body = 1;
  * @return {string}
  */
-proto.hackgt6.GroupInvite.prototype.getBody = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.hackgt6.GroupInvite.prototype.getBody = function () {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ''));
 };
 
 
 /** @param {string} value */
-proto.hackgt6.GroupInvite.prototype.setBody = function(value) {
+proto.hackgt6.GroupInvite.prototype.setBody = function (value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -181,13 +183,13 @@ proto.hackgt6.GroupInvite.prototype.setBody = function(value) {
  * repeated string invite_phone_num = 2;
  * @return {!Array<string>}
  */
-proto.hackgt6.GroupInvite.prototype.getInvitePhoneNumList = function() {
+proto.hackgt6.GroupInvite.prototype.getInvitePhoneNumList = function () {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
 
 /** @param {!Array<string>} value */
-proto.hackgt6.GroupInvite.prototype.setInvitePhoneNumList = function(value) {
+proto.hackgt6.GroupInvite.prototype.setInvitePhoneNumList = function (value) {
   jspb.Message.setField(this, 2, value || []);
 };
 
@@ -196,15 +198,14 @@ proto.hackgt6.GroupInvite.prototype.setInvitePhoneNumList = function(value) {
  * @param {string} value
  * @param {number=} opt_index
  */
-proto.hackgt6.GroupInvite.prototype.addInvitePhoneNum = function(value, opt_index) {
+proto.hackgt6.GroupInvite.prototype.addInvitePhoneNum = function (value, opt_index) {
   jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
 
-proto.hackgt6.GroupInvite.prototype.clearInvitePhoneNumList = function() {
+proto.hackgt6.GroupInvite.prototype.clearInvitePhoneNumList = function () {
   this.setInvitePhoneNumList([]);
 };
-
 
 
 /**
@@ -217,7 +218,7 @@ proto.hackgt6.GroupInvite.prototype.clearInvitePhoneNumList = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.hackgt6.InviteToken = function(opt_data) {
+proto.hackgt6.InviteToken = function (opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.hackgt6.InviteToken, jspb.Message);
@@ -237,12 +238,12 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.hackgt6.InviteToken.prototype.toObject = function(opt_includeInstance) {
-  return proto.hackgt6.InviteToken.toObject(opt_includeInstance, this);
-};
+  proto.hackgt6.InviteToken.prototype.toObject = function (opt_includeInstance) {
+    return proto.hackgt6.InviteToken.toObject(opt_includeInstance, this);
+  };
 
 
-/**
+  /**
  * Static version of the {@see toObject} method.
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
@@ -251,18 +252,19 @@ proto.hackgt6.InviteToken.prototype.toObject = function(opt_includeInstance) {
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.hackgt6.InviteToken.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    tokenId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    phoneNumber: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    expiration: (f = msg.getExpiration()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
-  };
+  proto.hackgt6.InviteToken.toObject = function (includeInstance, msg) {
+    let f; const
+      obj = {
+        tokenId: jspb.Message.getFieldWithDefault(msg, 1, ''),
+        phoneNumber: jspb.Message.getFieldWithDefault(msg, 2, ''),
+        expiration: (f = msg.getExpiration()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+      };
 
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
+    if (includeInstance) {
+      obj.$jspbMessageInstance = msg;
+    }
+    return obj;
+  };
 }
 
 
@@ -271,9 +273,9 @@ proto.hackgt6.InviteToken.toObject = function(includeInstance, msg) {
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.hackgt6.InviteToken}
  */
-proto.hackgt6.InviteToken.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.hackgt6.InviteToken;
+proto.hackgt6.InviteToken.deserializeBinary = function (bytes) {
+  const reader = new jspb.BinaryReader(bytes);
+  const msg = new proto.hackgt6.InviteToken();
   return proto.hackgt6.InviteToken.deserializeBinaryFromReader(msg, reader);
 };
 
@@ -285,29 +287,29 @@ proto.hackgt6.InviteToken.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.hackgt6.InviteToken}
  */
-proto.hackgt6.InviteToken.deserializeBinaryFromReader = function(msg, reader) {
+proto.hackgt6.InviteToken.deserializeBinaryFromReader = function (msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
-    var field = reader.getFieldNumber();
+    const field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setTokenId(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPhoneNumber(value);
-      break;
-    case 3:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setExpiration(value);
-      break;
-    default:
-      reader.skipField();
-      break;
+      case 1:
+        var value = /** @type {string} */ (reader.readString());
+        msg.setTokenId(value);
+        break;
+      case 2:
+        var value = /** @type {string} */ (reader.readString());
+        msg.setPhoneNumber(value);
+        break;
+      case 3:
+        var value = new google_protobuf_timestamp_pb.Timestamp();
+        reader.readMessage(value, google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+        msg.setExpiration(value);
+        break;
+      default:
+        reader.skipField();
+        break;
     }
   }
   return msg;
@@ -318,8 +320,8 @@ proto.hackgt6.InviteToken.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.hackgt6.InviteToken.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
+proto.hackgt6.InviteToken.prototype.serializeBinary = function () {
+  const writer = new jspb.BinaryWriter();
   proto.hackgt6.InviteToken.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
@@ -332,20 +334,20 @@ proto.hackgt6.InviteToken.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.hackgt6.InviteToken.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
+proto.hackgt6.InviteToken.serializeBinaryToWriter = function (message, writer) {
+  let f;
   f = message.getTokenId();
   if (f.length > 0) {
     writer.writeString(
       1,
-      f
+      f,
     );
   }
   f = message.getPhoneNumber();
   if (f.length > 0) {
     writer.writeString(
       2,
-      f
+      f,
     );
   }
   f = message.getExpiration();
@@ -353,7 +355,7 @@ proto.hackgt6.InviteToken.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter,
     );
   }
 };
@@ -363,13 +365,13 @@ proto.hackgt6.InviteToken.serializeBinaryToWriter = function(message, writer) {
  * optional string token_id = 1;
  * @return {string}
  */
-proto.hackgt6.InviteToken.prototype.getTokenId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.hackgt6.InviteToken.prototype.getTokenId = function () {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ''));
 };
 
 
 /** @param {string} value */
-proto.hackgt6.InviteToken.prototype.setTokenId = function(value) {
+proto.hackgt6.InviteToken.prototype.setTokenId = function (value) {
   jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -378,13 +380,13 @@ proto.hackgt6.InviteToken.prototype.setTokenId = function(value) {
  * optional string phone_number = 2;
  * @return {string}
  */
-proto.hackgt6.InviteToken.prototype.getPhoneNumber = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+proto.hackgt6.InviteToken.prototype.getPhoneNumber = function () {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ''));
 };
 
 
 /** @param {string} value */
-proto.hackgt6.InviteToken.prototype.setPhoneNumber = function(value) {
+proto.hackgt6.InviteToken.prototype.setPhoneNumber = function (value) {
   jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -393,19 +395,19 @@ proto.hackgt6.InviteToken.prototype.setPhoneNumber = function(value) {
  * optional google.protobuf.Timestamp expiration = 3;
  * @return {?proto.google.protobuf.Timestamp}
  */
-proto.hackgt6.InviteToken.prototype.getExpiration = function() {
+proto.hackgt6.InviteToken.prototype.getExpiration = function () {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
     jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
 };
 
 
 /** @param {?proto.google.protobuf.Timestamp|undefined} value */
-proto.hackgt6.InviteToken.prototype.setExpiration = function(value) {
+proto.hackgt6.InviteToken.prototype.setExpiration = function (value) {
   jspb.Message.setWrapperField(this, 3, value);
 };
 
 
-proto.hackgt6.InviteToken.prototype.clearExpiration = function() {
+proto.hackgt6.InviteToken.prototype.clearExpiration = function () {
   this.setExpiration(undefined);
 };
 
@@ -414,10 +416,9 @@ proto.hackgt6.InviteToken.prototype.clearExpiration = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.hackgt6.InviteToken.prototype.hasExpiration = function() {
+proto.hackgt6.InviteToken.prototype.hasExpiration = function () {
   return jspb.Message.getField(this, 3) != null;
 };
-
 
 
 /**
@@ -430,7 +431,7 @@ proto.hackgt6.InviteToken.prototype.hasExpiration = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.hackgt6.InviteResponse = function(opt_data) {
+proto.hackgt6.InviteResponse = function (opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, proto.hackgt6.InviteResponse.repeatedFields_, null);
 };
 goog.inherits(proto.hackgt6.InviteResponse, jspb.Message);
@@ -445,7 +446,6 @@ if (goog.DEBUG && !COMPILED) {
 proto.hackgt6.InviteResponse.repeatedFields_ = [1];
 
 
-
 if (jspb.Message.GENERATE_TO_OBJECT) {
 /**
  * Creates an object representation of this proto suitable for use in Soy templates.
@@ -457,12 +457,12 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.hackgt6.InviteResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.hackgt6.InviteResponse.toObject(opt_includeInstance, this);
-};
+  proto.hackgt6.InviteResponse.prototype.toObject = function (opt_includeInstance) {
+    return proto.hackgt6.InviteResponse.toObject(opt_includeInstance, this);
+  };
 
 
-/**
+  /**
  * Static version of the {@see toObject} method.
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
@@ -471,17 +471,18 @@ proto.hackgt6.InviteResponse.prototype.toObject = function(opt_includeInstance) 
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.hackgt6.InviteResponse.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    invitesList: jspb.Message.toObjectList(msg.getInvitesList(),
-    proto.hackgt6.InviteToken.toObject, includeInstance)
-  };
+  proto.hackgt6.InviteResponse.toObject = function (includeInstance, msg) {
+    let f; const
+      obj = {
+        invitesList: jspb.Message.toObjectList(msg.getInvitesList(),
+          proto.hackgt6.InviteToken.toObject, includeInstance),
+      };
 
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
+    if (includeInstance) {
+      obj.$jspbMessageInstance = msg;
+    }
+    return obj;
+  };
 }
 
 
@@ -490,9 +491,9 @@ proto.hackgt6.InviteResponse.toObject = function(includeInstance, msg) {
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.hackgt6.InviteResponse}
  */
-proto.hackgt6.InviteResponse.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.hackgt6.InviteResponse;
+proto.hackgt6.InviteResponse.deserializeBinary = function (bytes) {
+  const reader = new jspb.BinaryReader(bytes);
+  const msg = new proto.hackgt6.InviteResponse();
   return proto.hackgt6.InviteResponse.deserializeBinaryFromReader(msg, reader);
 };
 
@@ -504,21 +505,21 @@ proto.hackgt6.InviteResponse.deserializeBinary = function(bytes) {
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
  * @return {!proto.hackgt6.InviteResponse}
  */
-proto.hackgt6.InviteResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.hackgt6.InviteResponse.deserializeBinaryFromReader = function (msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
     }
-    var field = reader.getFieldNumber();
+    const field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = new proto.hackgt6.InviteToken;
-      reader.readMessage(value,proto.hackgt6.InviteToken.deserializeBinaryFromReader);
-      msg.addInvites(value);
-      break;
-    default:
-      reader.skipField();
-      break;
+      case 1:
+        var value = new proto.hackgt6.InviteToken();
+        reader.readMessage(value, proto.hackgt6.InviteToken.deserializeBinaryFromReader);
+        msg.addInvites(value);
+        break;
+      default:
+        reader.skipField();
+        break;
     }
   }
   return msg;
@@ -529,8 +530,8 @@ proto.hackgt6.InviteResponse.deserializeBinaryFromReader = function(msg, reader)
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.hackgt6.InviteResponse.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
+proto.hackgt6.InviteResponse.prototype.serializeBinary = function () {
+  const writer = new jspb.BinaryWriter();
   proto.hackgt6.InviteResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
@@ -543,14 +544,14 @@ proto.hackgt6.InviteResponse.prototype.serializeBinary = function() {
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.hackgt6.InviteResponse.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
+proto.hackgt6.InviteResponse.serializeBinaryToWriter = function (message, writer) {
+  let f;
   f = message.getInvitesList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.hackgt6.InviteToken.serializeBinaryToWriter
+      proto.hackgt6.InviteToken.serializeBinaryToWriter,
     );
   }
 };
@@ -560,14 +561,14 @@ proto.hackgt6.InviteResponse.serializeBinaryToWriter = function(message, writer)
  * repeated InviteToken invites = 1;
  * @return {!Array<!proto.hackgt6.InviteToken>}
  */
-proto.hackgt6.InviteResponse.prototype.getInvitesList = function() {
+proto.hackgt6.InviteResponse.prototype.getInvitesList = function () {
   return /** @type{!Array<!proto.hackgt6.InviteToken>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.hackgt6.InviteToken, 1));
 };
 
 
 /** @param {!Array<!proto.hackgt6.InviteToken>} value */
-proto.hackgt6.InviteResponse.prototype.setInvitesList = function(value) {
+proto.hackgt6.InviteResponse.prototype.setInvitesList = function (value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
@@ -577,12 +578,12 @@ proto.hackgt6.InviteResponse.prototype.setInvitesList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.hackgt6.InviteToken}
  */
-proto.hackgt6.InviteResponse.prototype.addInvites = function(opt_value, opt_index) {
+proto.hackgt6.InviteResponse.prototype.addInvites = function (opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.hackgt6.InviteToken, opt_index);
 };
 
 
-proto.hackgt6.InviteResponse.prototype.clearInvitesList = function() {
+proto.hackgt6.InviteResponse.prototype.clearInvitesList = function () {
   this.setInvitesList([]);
 };
 

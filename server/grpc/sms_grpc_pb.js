@@ -1,9 +1,9 @@
 // GENERATED CODE -- DO NOT EDIT!
 
-'use strict';
-var grpc = require('grpc');
-var sms_pb = require('./sms_pb.js');
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+
+const grpc = require('grpc');
+const google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+const sms_pb = require('./sms_pb.js');
 
 function serialize_hackgt6_GroupInvite(arg) {
   if (!(arg instanceof sms_pb.GroupInvite)) {
@@ -29,7 +29,7 @@ function deserialize_hackgt6_InviteResponse(buffer_arg) {
 
 
 // Service responsible for sending and managing invite SMS messages.
-var SMSServiceService = exports.SMSServiceService = {
+const SMSServiceService = exports.SMSServiceService = {
   createGroupInvite: {
     path: '/hackgt6.SMSService/CreateGroupInvite',
     requestStream: false,
