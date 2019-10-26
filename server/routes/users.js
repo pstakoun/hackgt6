@@ -46,9 +46,29 @@ router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureR
   });
 });
 
+router.get('/auth/spotify/authorize', (req, res) => {
+  if (req.user) {
+    database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
+      res.json(user);
+    });
+  } else {
+    database.createUserSpotify({}, (err, user) => {
+      database.setUserSpotifyAuthCode(user.id, req.query.code, (err, user) => {
+        req.login(user, (err) => {
+          if (err) {
+            res.send('Error');
+          } else {
+            res.json(user);
+          }
+        });
+      });
+    });
+  }
+});
+
 router.get('/me', (req, res) => {
   if (!req.user) {
-    res.redirect('/users/auth/spotify');
+    res.json({ error: 'Not authorized' });
   } else {
     res.json(spotify.getMe(req.user));
   }

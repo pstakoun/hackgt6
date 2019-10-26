@@ -1,0 +1,19 @@
+syntax = "proto3";
+package hackgt6;
+
+import "google/protobuf/timestamp.proto";
+
+// Service responsible for sending and managing invite SMS messages.
+service SMSService {
+    rpc CreateGroupInvite(GroupInvite) returns (InviteToken);
+}
+
+message GroupInvite {
+    string body = 1;
+    repeated string invite_phone_num = 2;
+}
+
+message InviteToken {
+    string token_id = 1;
+    google.protobuf.Timestamp expiration = 2;
+}
