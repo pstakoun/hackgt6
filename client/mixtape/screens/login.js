@@ -41,17 +41,17 @@ export default class login extends React.Component {
   }
   _handleOpenURL(event) {
     var code = event.url.split("code=")[1];
-    console.log(code);
     this.setState((state, props) =>
       ({
-        authcode: event.url
+        authcode: code
     }));
-    this.postAuthCode().bind(this)
+    this.postAuthCode();
   }
 
   postAuthCode() {
-    fetch('localhost:3000/users/auth/spotify/callback?code=' + this.state.authcode)
-      .then((response) => console.log(response))
+    fetch('http://localhost:3000/users/auth/spotify/authorize?code=' + this.state.authcode)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }
 
   render() {

@@ -3,6 +3,7 @@ import React, {Fragment} from 'react'
 import {   SafeAreaView,
   StyleSheet, Platform,   StatusBar,
   Switch, Text, View , Button, Linking} from 'react-native'
+//import GropuItem from '../components/groupItem'
 
 export default class groups extends React.Component {
   constructor(props) {
@@ -16,9 +17,7 @@ export default class groups extends React.Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <View>
-            <Text>DID THIS WORK</Text>
-          </View>
+
         </SafeAreaView>
       </Fragment>
     );

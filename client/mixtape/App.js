@@ -4,7 +4,6 @@ import { createAppContainer } from 'react-navigation';
 import { createSwitchNavigator } from 'react-navigation'
 // import the different screens
 import login from './screens/login'
-import webauth from './screens/webauth'
 
 import groups from './screens/groups'
 
@@ -13,9 +12,6 @@ const AuthStack = createSwitchNavigator( {
   Login: {
     screen: login
   },
-  WebAuth: {
-    screen: webauth
-  }
 });
 
 const MainStack = createStackNavigator( {
