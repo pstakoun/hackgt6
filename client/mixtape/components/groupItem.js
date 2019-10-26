@@ -17,10 +17,7 @@ export default class GroupItem extends React.Component {
     return (
       <TouchableOpacity onPress= {() => this.props.navigation.navigate('CurGroup', {id: this.props.id, first: false})}>
         <View style={[styles.itemWrapper, global.backColor]}>
-          <View>
-            <Text style={[styles.itemTitle, global.fontColor]}>{this.props.title}</Text>
-            <Text style={[styles.itemNote, global.fontColor]}>{this.props.mood}</Text>
-          </View>
+          <Text style={[styles.itemName, global.fontColor]}>{this.props.name}</Text>
           <View style={styles.chevronWrapper}>
             <Icon name='chevron-right' type={'evilicon'} size={40} color={'white'}/>
           </View>
@@ -32,13 +29,15 @@ export default class GroupItem extends React.Component {
 
 const styles = StyleSheet.create({
   itemWrapper: {
-    paddingHorizontal: 30,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingRight: 30,
+    paddingVertical: 15,
     flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderColor: '#707070',
+    marginLeft:30
   },
 
-  itemTitle: {
+  itemName: {
     fontSize: 23,
     fontWeight: 'bold',
   },
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
   chevronWrapper: {
     right: 30,
     position: 'absolute',
-    marginTop: 20,
+    marginTop: 12,
   },
 });
 

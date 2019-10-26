@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fee39e7c-74ac-45a6-8816-e243a15bd3b3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../client/mixtape/screens/addMembers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/mixtape/=" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/components/listItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/mixtape/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/mixtape/components/groupItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/components/groupItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/curGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/curGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/groups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/newGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/newGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
