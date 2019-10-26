@@ -39,8 +39,7 @@ router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureR
 router.get('/auth/spotify/authorize', (req, res) => {
   database.createUserSpotify({}, (err, user) => {
     database.setUserSpotifyAuthCode(user.id, req.query.code, (err, user) => {
-      req.user = user;
-      res.redirect('/users/me');
+      res.json(user);
     });
   });
 });
