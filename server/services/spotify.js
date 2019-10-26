@@ -38,9 +38,11 @@ const getMe = (user, done) => {
   });
 };
 
-const getTopArtists = (user, done) => {
+const getTopArtists = (user, options, done) => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
+
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/artists', {
+    request.get(`https://api.spotify.com/v1/me/top/artists?${opt}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -50,9 +52,10 @@ const getTopArtists = (user, done) => {
   });
 };
 
-const getTopTracks = (user, done) => {
+const getTopTracks = (user, options, done) => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/tracks', {
+    request.get(`https://api.spotify.com/v1/me/top/tracks?${opt}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -61,7 +64,19 @@ const getTopTracks = (user, done) => {
     });
   });
 };
-
+/*
+const getRecommendations = (user, param, done) => {
+  getToken(user, (err, body) => {
+    request.get('https://api.spotify.com/v1/recommendations', {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+*/
 const getGroupTracks = (groupId, done) => {
   database.findUsersInGroup(groupId, (err, users) => {
     const userResults = [];
@@ -89,6 +104,36 @@ const getGroupArtists = (user, groupId, done) => {
     });
   });
 };
+
+
+/* //TODO
+const getGroupValues = (user, groupId, done) => {
+  database.findUsersInGroup(groupId, (err, users) => {
+    const userArt = [];
+    const userTracks = [];
+
+    users.forEach((user) => {
+      getTopArtists(user, (err, body) => {
+
+        if (userArt.length === users.length) {
+          // TODO
+        }
+      });
+      getTopTracks(user, (err, body) => {
+        const cur = JSON.parse(body);
+        for (var dat in cur['items']) {
+            userTracks.push(dat['id'])
+        }
+        console.log
+        if (userTracks.length === users.length) {
+          // TODO
+        }
+      });
+    });
+  });
+};
+*/
+
 
 exports.getMe = getMe;
 exports.getTopArtists = getTopArtists;
