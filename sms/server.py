@@ -1,25 +1,37 @@
 """GRPC server for the SMS service"""
 import sms_pb2_grpc
 import sms_pb2
+import att_api
+
 from google.protobuf.timestamp_pb2 import Timestamp
-from concurrent import futures
 import grpc
 
-def create_token(playlist_id, body, phone_nums):
-    return '69'
+import uuid
+from datetime import datetime, timedelta
+from concurrent import futures
+
+
+def send_sms_request(body, phone_nums):
+    # Generates a unique ID for the invite code
+    invite_token = uuid.uuid4().hex[:8]
+
+    for phone_num in phone_nums:
+        att_api.send_message(phone_num, body + f'https://ape.ape/invite/${invite_token}')
+    return invite_token
+
 
 class SMSServer(sms_pb2_grpc.SMSServiceServicer):
     def CreateGroupInvite(self, request, context):
         """Handler for group invitation."""
-        token = create_token(request.playlist_id, request.body, request.invite_phone_num)
-        print('WUT!')
+        token = send_sms_request(request.body, request.invite_phone_num)
+        tomorrow = datetime.now() + timedelta(hours=24)
         timestamp = Timestamp()
-        timestamp.GetCurrentTime()
-        print(timestamp)
+        timestamp.FromDatetime(tomorrow)
         return sms_pb2.InviteToken(
             token_id=token,
             expiration=timestamp
         )
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

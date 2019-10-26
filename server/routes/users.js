@@ -58,7 +58,7 @@ router.get('/auth/spotify/authorize', (req, res) => {
 
 router.get('/me', (req, res) => {
   if (!req.user) {
-    res.redirect('/users/auth/spotify');
+    res.json({ error: 'Not authorized' });
   } else {
     res.json(spotify.getMe(req.user));
   }

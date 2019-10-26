@@ -9,9 +9,8 @@ service SMSService {
 }
 
 message GroupInvite {
-    string playlist_id = 1;
-    string body = 2;
-    repeated string invite_phone_num = 3;
+    string body = 1;
+    repeated string invite_phone_num = 2;
 }
 
 message InviteToken {
