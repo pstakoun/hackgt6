@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
+const bodyParser = require('body-parser');
 const database = require('../services/database');
 const spotify = require('../services/spotify');
 
@@ -14,7 +15,7 @@ passport.use(
       callbackURL: 'http://localhost:3000/users/auth/spotify/callback',
     },
     ((accessToken, refreshToken, expires_in, profile, done) => {
-      database.createUserSpotify(profile.id, done);
+      database.createUserSpotify(profile, done);
     }),
   ),
 );
@@ -27,7 +28,16 @@ passport.deserializeUser((id, done) => {
   database.getUser(id, done);
 });
 
-router.get('/auth/spotify', passport.authenticate('spotify'), (req, res) => {
+router.use(bodyParser.json()); // support json encoded bodies
+router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+
+router.get('/auth/spotify', passport.authenticate('spotify',
+  {
+    scope: ['user-read-email', 'user-read-private', 'playlist-modify-private', 'playlist-modify-public', 'playlist-read-collaborative', 'playlist-read-private',
+  ] /*,
+    showDialog: true,*/
+  }), (req, res) => {
 });
 
 router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/users/auth/spotify' }), (req, res) => {
@@ -41,6 +51,15 @@ router.get('/me', (req, res) => {
     res.redirect('/users/auth/spotify');
   } else {
     res.json(spotify.getMe(req.user));
+  }
+});
+
+router.get('/playlists', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'notAuthed.' });
+  } else {
+    console.log(user)
+    res.json(spotify.createPlaylist('mmyname', req.user));
   }
 });
 
