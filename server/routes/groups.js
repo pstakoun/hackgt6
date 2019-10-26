@@ -1,5 +1,6 @@
 const express = require('express');
 const database = require('../services/database');
+const spotify = require('../services/spotify');
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ router.post('/', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    database.createGroup(req.user.id, (err, group) => {
+    database.createGroup(req.user.id, req.body.name, (err, group) => {
       if (err) {
         res.json({ error: err });
       } else {
@@ -74,6 +75,22 @@ router.post('/:group/playlists', (req, res) => {
       });
     })
 
+  }
+});
+
+router.post('/:group/playlists/:playlist/play', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    database.getGroupPlaylist(req.params.playlist, (err, groupPlaylist) => {
+      if (err) {
+        res.json({ error: err });
+      } else {
+        spotify.playPlaylist(req.user, groupPlaylist.spotifyId, (err, result) => {
+          res.json(result);
+        });
+      }
+    });
   }
 });
 

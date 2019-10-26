@@ -4,6 +4,9 @@ const GroupSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  owner: {
+    type: String,
+  },
   playlists: {
     type: [String],
   },

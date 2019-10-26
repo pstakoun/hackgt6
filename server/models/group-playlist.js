@@ -7,6 +7,12 @@ const GroupPlaylistSchema = new mongoose.Schema({
   group: {
     type: String,
   },
+  spotifyId: {
+    type: String,
+  },
+  songs: {
+    type: [String],
+  },
 });
 
 const GroupPlaylist = mongoose.model('GroupPlaylist', GroupPlaylistSchema);

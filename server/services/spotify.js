@@ -135,38 +135,26 @@ const getGroupArtists = (user, groupId, done) => {
 };
 
 
-/* //TODO
-const getGroupValues = (user, groupId, done) => {
-  database.findUsersInGroup(groupId, (err, users) => {
-    const userArt = [];
-    const userTracks = [];
 
-    users.forEach((user) => {
-      getTopArtists(user, (err, body) => {
-
-        if (userArt.length === users.length) {
-          // TODO
-        }
-      });
-      getTopTracks(user, (err, body) => {
-        const cur = JSON.parse(body);
-        for (var dat in cur['items']) {
-            userTracks.push(dat['id'])
-        }
-        console.log
-        if (userTracks.length === users.length) {
-          // TODO
-        }
-      });
+const playPlaylist = (user, id, done) => {
+  getToken(user, (err, body) => {
+    request.put('https://api.spotify.com/v1/me/player/play', {
+      json: {
+        context_uri: `spotify:playlist:${id}`,
+      },
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
     });
   });
 };
-*/
-
 
 exports.getMe = getMe;
 exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;
 exports.getGroupTracks = getGroupTracks;
 exports.getGroupArtists = getGroupArtists;
+exports.playPlaylist = playPlaylist;
 exports.createPlaylist = createPlaylist;
