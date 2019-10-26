@@ -3,11 +3,9 @@ const sms = require('../grpc/sms_client');
 
 const router = express.Router();
 
-/**
- * Routes:
- * - POST / (create invitation)
- * - GET /join/token/{tokenId} (accept invitation)
- */
+// This is temporary
+// #hackathon lyfe
+const invites = {};
 
 /**
  * Invite a list of phone numbers to a group.
@@ -24,7 +22,11 @@ router.post('/', (req, res) => {
     // TODO: Also make the message body not a fucking meme.
     sms.createGroupInvite('Ape Benison invited you to join unknown product name #69! Join'
       + ' using this link: ', JSON.parse(req.body.phoneNumbers)).then((response) => {
-      // TODO: Store the token and expiration in Mongo
+      invites[response.getTokenId()] = {
+        phoneNumber: response.getPhoneNumber(),
+        invitedFrom: req.user,
+        expiration: response.getExpiration(),
+      };
       res.status(200).json({ message: response });
     });
   }
@@ -34,10 +36,10 @@ router.post('/', (req, res) => {
  * Join a group with an invite code.
  */
 router.get('/join/:token', (req, res) => {
-  // TODO: Is token valid and unexpired?
-  // TODO: Join the group
-  res.send({ message: 'fuck off cunt' });
+  if (!invites[req.params.token]) {
+    res.status(404).send({ message: 'fuck off cunt' });
+  }
+  // TODO(Peter): Add the user to the group.
 });
-
 
 module.exports = router;
