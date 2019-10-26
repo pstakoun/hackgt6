@@ -67,6 +67,19 @@ const getRecommendations = (user, options, done) => {
 };
 
 const createPlaylist = (user, options, done) => {
+  getToken(user, (err, body) => {
+    request.post(`https://api.spotify.com/v1/users/${user.spotifyId}/playlists`, {
+      json: options,
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+
+/* const addToPlaylist = (user, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
     request.post(`https://api.spotify.com/v1/users/${user.spotifyId}/playlists?${opt}`, {
@@ -77,21 +90,7 @@ const createPlaylist = (user, options, done) => {
       done(err, body);
     });
   });
-};
-
-
-const addToPlaylist = (user, options, done) => {
-  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
-  getToken(user, (err, body) => {
-    request.post(`https://api.spotify.com/v1/users/${user.spotifyId}/playlists?${opt}`, {
-      headers: {
-        Authorization: `Bearer ${body.access_token}`,
-      },
-    }, (err, res, body) => {
-      done(err, body);
-    });
-  });
-};
+}; */
 
 
 const getTopTracks = (user, options, done) => {

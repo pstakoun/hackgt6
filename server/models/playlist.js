@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const GroupPlaylistSchema = new mongoose.Schema({
+const PlaylistSchema = new mongoose.Schema({
   name: {
     type: String,
   },
@@ -15,6 +15,6 @@ const GroupPlaylistSchema = new mongoose.Schema({
   },
 });
 
-const GroupPlaylist = mongoose.model('GroupPlaylist', GroupPlaylistSchema);
+const Playlist = mongoose.model('Playlist', PlaylistSchema);
 
-module.exports = GroupPlaylist;
+module.exports = Playlist;

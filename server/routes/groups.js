@@ -50,11 +50,11 @@ router.get('/:group/playlists', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    database.getGroupPlaylists(req.params.group, (err, groupPlaylists) => {
+    database.getPlaylists(req.params.group, (err, playlists) => {
       if (err) {
         res.json({ error: err });
       } else {
-        res.json(groupPlaylists);
+        res.json(playlists);
       }
     });
   }
@@ -66,11 +66,11 @@ router.post('/:group/playlists', (req, res) => {
   } else {
     const opts = { name: req.params.group, public: false, collaborative: true };
     spotify.createPlaylist(req.user, opts, (err, body) => {
-      database.createGroupPlaylist(req.params.group, body.id, (err, groupPlaylist) => {
+      database.createPlaylist(req.params.group, body.id, (err, playlist) => {
         if (err) {
           res.json({ error: err });
         } else {
-          res.json(groupPlaylist);
+          res.json(playlist);
         }
       });
     });
@@ -81,11 +81,11 @@ router.post('/:group/playlists/:playlist/play', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    database.getGroupPlaylist(req.params.playlist, (err, groupPlaylist) => {
+    database.getPlaylist(req.params.playlist, (err, playlist) => {
       if (err) {
         res.json({ error: err });
       } else {
-        spotify.playPlaylist(req.user, groupPlaylist.spotifyId, (err, result) => {
+        spotify.playPlaylist(req.user, playlist.spotifyId, (err, result) => {
           res.json(result);
         });
       }
