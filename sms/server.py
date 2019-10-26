@@ -17,7 +17,7 @@ def send_sms_request(body, phone_nums):
         # Generates a unique ID for the invite code
         invite_token = uuid.uuid4().hex[:8]
         # TODO(Drake): Eventually do this in a try catch for error handling
-        att_api.send_message(phone_num, body + f'https://ape.ape/invite/${invite_token}')
+        att_api.send_message(phone_num, f'{body} https://ape.ape/invite/{invite_token}')
         invite_proto = sms_pb2.InviteToken(phone_number=phone_num, token_id=invite_token, expiration=generate_expiration())
         invites.append(invite_proto)
     return invites
