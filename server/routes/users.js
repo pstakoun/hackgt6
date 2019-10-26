@@ -42,9 +42,15 @@ router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 router.get('/auth/spotify', passport.authenticate('spotify',
   {
-    scope: ['user-read-email', 'user-read-private', 'playlist-modify-private', 'playlist-modify-public', 'playlist-read-collaborative', 'playlist-read-private',
-    ], /* ,
-    showDialog: true, */
+    scope: [
+      'user-read-email',
+      'user-read-private',
+      'user-top-read',
+      'playlist-modify-private',
+      'playlist-modify-public',
+      'playlist-read-collaborative',
+      'playlist-read-private',
+    ],
   }), (req, res) => {
 });
 
@@ -75,6 +81,11 @@ router.get('/auth/spotify/authorize', (req, res) => {
   }
 });
 
+router.get('/auth/logout', (req, res) => {
+  req.logout();
+  res.json({ success: true });
+});
+
 router.get('/me', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -85,9 +96,24 @@ router.get('/me', (req, res) => {
   }
 });
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.json({ success: true });
+router.get('/me/top/artists', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getTopArtists(req.user, (err, body) => {
+      res.json(body);
+    });
+  }
+});
+
+router.get('/me/top/tracks', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getTopTracks(req.user, (err, body) => {
+      res.json(body);
+    });
+  }
 });
 
 module.exports = router;

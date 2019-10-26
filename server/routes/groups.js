@@ -31,6 +31,20 @@ router.post('/', (req, res) => {
   }
 });
 
+router.get('/:group/users', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    database.findUsersInGroup(req.params.group, (err, users) => {
+      if (err) {
+        res.json({ error: err });
+      } else {
+        res.json(users);
+      }
+    });
+  }
+});
+
 router.get('/:group/playlists', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
