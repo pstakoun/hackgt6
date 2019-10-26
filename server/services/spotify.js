@@ -40,7 +40,6 @@ const getMe = (user, done) => {
 
 const getTopArtists = (user, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
-
   getToken(user, (err, body) => {
     request.get(`https://api.spotify.com/v1/me/top/artists?${opt}`, {
       headers: {
@@ -61,7 +60,7 @@ const getRecommendations = (user, options, done) => {
         Authorization: `Bearer ${body.access_token}`,
       },
     }, (err, res, body) => {
-      done(err, body);
+      done(err, JSON.parse(body));
     });
   });
 };
@@ -79,19 +78,20 @@ const createPlaylist = (user, options, done) => {
   });
 };
 
-/* const addToPlaylist = (user, options, done) => {
-  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
+const addToPlaylist = (user, playlist, tracks, done) => {
   getToken(user, (err, body) => {
-    request.post(`https://api.spotify.com/v1/users/${user.spotifyId}/playlists?${opt}`, {
+    request.post(`https://api.spotify.com/v1/playlists/${playlist}/tracks`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
+      },
+      json: {
+        uris: tracks.map((t) => `spotify:track:${t}`),
       },
     }, (err, res, body) => {
       done(err, body);
     });
   });
-}; */
-
+};
 
 const getTopTracks = (user, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
@@ -105,19 +105,7 @@ const getTopTracks = (user, options, done) => {
     });
   });
 };
-/*
-const getRecommendations = (user, param, done) => {
-  getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/recommendations', {
-      headers: {
-        Authorization: `Bearer ${body.access_token}`,
-      },
-    }, (err, res, body) => {
-      done(err, body);
-    });
-  });
-};
-*/
+
 const getGroupTracks = (groupId, done) => {
   database.findUsersInGroup(groupId, (err, users) => {
     const userResults = [];
@@ -170,4 +158,5 @@ exports.getGroupTracks = getGroupTracks;
 exports.getGroupArtists = getGroupArtists;
 exports.playPlaylist = playPlaylist;
 exports.createPlaylist = createPlaylist;
+exports.addToPlaylist = addToPlaylist;
 exports.getRecommendations = getRecommendations;
