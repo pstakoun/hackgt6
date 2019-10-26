@@ -9,6 +9,7 @@ const passport = require('passport');
 const usersRouter = require('./routes/users');
 const groupsRouter = require('./routes/groups');
 const songsRouter = require('./routes/songs');
+const inviteRouter = require('./routes/invite');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(passport.session());
 app.use('/users', usersRouter);
 app.use('/groups', groupsRouter);
 app.use('/songs', songsRouter);
+app.use('/invite', inviteRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
