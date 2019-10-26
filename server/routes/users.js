@@ -4,6 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const database = require('../services/database');
+const spotify = require('../services/spotify');
 
 passport.use(
   new SpotifyStrategy(
@@ -13,7 +14,7 @@ passport.use(
       callbackURL: 'http://localhost:3000/users/auth/spotify/callback',
     },
     ((accessToken, refreshToken, expires_in, profile, done) => {
-      database.authUserSpotify(profile.id, done);
+      database.createUserSpotify(profile.id, done);
     }),
   ),
 );
@@ -30,11 +31,17 @@ router.get('/auth/spotify', passport.authenticate('spotify'), (req, res) => {
 });
 
 router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/users/auth/spotify' }), (req, res) => {
-  res.redirect('/users/me');
+  database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
+    res.redirect('/users/me');
+  });
 });
 
 router.get('/me', (req, res) => {
-  res.json(req.user);
+  if (!req.user) {
+    res.redirect('/users/auth/spotify');
+  } else {
+    res.json(spotify.getMe(req.user));
+  }
 });
 
 module.exports = router;

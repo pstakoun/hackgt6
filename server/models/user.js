@@ -7,6 +7,9 @@ const UserSchema = new mongoose.Schema({
   spotifyId: {
     type: String,
   },
+  spotifyAuthorizationCode: {
+    type: String,
+  },
 });
 
 const User = mongoose.model('User', UserSchema);
