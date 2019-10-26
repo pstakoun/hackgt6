@@ -20,8 +20,8 @@ const getUserSpotify = (id, done) => {
 };
 
 const setUserSpotifyAuthCode = (id, code, done) => {
-  User.updateOne({ _id: id }, { spotifyAuthorizationCode: code }, (err, user) => {
-    done(err, user);
+  User.updateOne({ _id: id }, { spotifyAuthorizationCode: code }, (err, res) => {
+    done(err, res);
   });
 };
 

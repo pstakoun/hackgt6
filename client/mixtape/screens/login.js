@@ -6,8 +6,7 @@ import {    SafeAreaView,
             Text,
             View ,
             Button,
-            Linking,
-            TouchableOpacity} from 'react-native'
+            Linking,} from 'react-native'
 
 export default class login extends React.Component {
   constructor(props) {
@@ -43,7 +42,9 @@ export default class login extends React.Component {
     var code = event.url.split("code=")[1];
     fetch('http://localhost:3000/users/auth/spotify/authorize?code=' + code)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .then(() => this.props.navigation.navigate('Main'))
+      .catch(error => console.log(error.message));
   }
 
   render() {

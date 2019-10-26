@@ -53,9 +53,10 @@ router.get('/auth/spotify/authorize', (req, res) => {
     });
   } else {
     database.createUserSpotify({}, (err, user) => {
-      database.setUserSpotifyAuthCode(user.id, req.query.code, (err, user) => {
+      database.setUserSpotifyAuthCode(user.id, req.query.code, (err, result) => {
         req.login(user, (err) => {
           if (err) {
+            console.log(err);
             res.send('Error');
           } else {
             res.json(user);

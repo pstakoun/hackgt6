@@ -6,27 +6,39 @@ import { createSwitchNavigator } from 'react-navigation'
 import login from './screens/login'
 
 import groups from './screens/groups'
+import curGroup from './screens/curGroup'
+import newGroup from './screens/newGroup'
+
+import global from './style/global'
 
 // create our app's navigation stack
 const AuthStack = createSwitchNavigator( {
-  Login: {
-    screen: login
-  },
+    Login: {
+      screen: login
+    },
 });
 
 const MainStack = createStackNavigator( {
-    Main: {
+    Groups: {
       screen: groups,
     },
+    NewGroup: {
+      screen: newGroup,
+    },
+    CurGroup: {
+      screen: curGroup,
+    }
   },
   {
     defaultNavigationOptions: {
       headerStyle: {
         height: 60,
+        backgroundColor: '#242424',
       },
       headerTitleStyle: {
-        fontWeight: 'normal',
-        fontSize: 25,
+        fontWeight: 'bold',
+        fontSize: 30,
+        color: 'white',
       },
     }
   });
