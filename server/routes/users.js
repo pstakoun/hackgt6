@@ -14,7 +14,7 @@ passport.use(
       callbackURL: 'http://localhost:3000/users/auth/spotify/callback',
     },
     ((accessToken, refreshToken, expires_in, profile, done) => {
-      database.createUserSpotify(profile.id, done);
+      database.createUserSpotify(profile, done);
     }),
   ),
 );
@@ -33,6 +33,15 @@ router.get('/auth/spotify', passport.authenticate('spotify'), (req, res) => {
 router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/users/auth/spotify' }), (req, res) => {
   database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
     res.redirect('/users/me');
+  });
+});
+
+router.get('/auth/spotify/authorize', (req, res) => {
+  database.createUserSpotify({}, (err, user) => {
+    database.setUserSpotifyAuthCode(user.id, req.query.code, (err, user) => {
+      req.user = user;
+      res.redirect('/users/me');
+    });
   });
 });
 
