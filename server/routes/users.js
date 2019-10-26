@@ -4,7 +4,6 @@ const router = express.Router();
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const database = require('../services/database');
-const User = require('../models/user');
 
 passport.use(
   new SpotifyStrategy(
@@ -14,8 +13,6 @@ passport.use(
       callbackURL: 'http://localhost:3000/users/auth/spotify/callback',
     },
     ((accessToken, refreshToken, expires_in, profile, done) => {
-      console.log(accessToken);
-      console.log(refreshToken);
       database.authUserSpotify(profile.id, done);
     }),
   ),
@@ -26,23 +23,17 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+  database.getUser(id, done);
 });
 
-router.get('/auth/spotify', passport.authenticate('spotify'), (req, res, next) => {
+router.get('/auth/spotify', passport.authenticate('spotify'), (req, res) => {
 });
 
-router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/users/auth/spotify/failure' }), (req, res, next) => {
-  res.send('Authentication success');
+router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/users/auth/spotify' }), (req, res) => {
+  res.redirect('/users/me');
 });
 
-router.get('/auth/spotify/failure', (req, res, next) => {
-  res.send('Authentication failure');
-});
-
-router.get('/me', (req, res, next) => {
+router.get('/me', (req, res) => {
   res.json(req.user);
 });
 

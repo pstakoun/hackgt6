@@ -9,4 +9,11 @@ const authUserSpotify = (profile, done) => {
   });
 };
 
+const getUser = (id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+};
+
 exports.authUserSpotify = authUserSpotify;
+exports.getUser = getUser;
