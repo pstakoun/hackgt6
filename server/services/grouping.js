@@ -23,7 +23,6 @@ const getValues = (user, done) => {
       const cur = JSON.parse(body);
       for (let i = 0; i < cur.limit; i++) {
         userTracks.push(cur.items[i][out]);
-
         for (let j = 0; j < cur.items[i].album.artists.length; j++) {
           const artist = cur.items[i].album.artists[j][out];
           //  console.log(cur['items'][i]['album']['artists'][j])

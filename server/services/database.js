@@ -72,8 +72,8 @@ const getGroupPlaylists = (groupId, done) => {
   });
 };
 
-const createGroupPlaylist = (groupId, done) => {
-  GroupPlaylist.create({ group: groupId }, (err, groupPlaylist) => {
+const createGroupPlaylist = (groupId, spotifyId, done) => {
+  GroupPlaylist.create({ group: groupId, spotifyId: spotifyId }, (err, groupPlaylist) => {
     if (err) {
       done(err, null);
     } else {

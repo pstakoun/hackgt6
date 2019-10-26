@@ -63,13 +63,17 @@ router.post('/:group/playlists', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    database.createGroupPlaylist(req.params.group, (err, groupPlaylist) => {
-      if (err) {
-        res.json({ error: err });
-      } else {
-        res.json(groupPlaylist);
-      }
-    });
+    const opts = { name : req.params.group, public: false, collaborative: true };
+    spotify.createPlaylist(req.user, opts, (err, body) => {
+      database.createGroupPlaylist(req.params.group, body.id, (err, groupPlaylist) => {
+        if (err) {
+          res.json({ error: err });
+        } else {
+          res.json(groupPlaylist);
+        }
+      });
+    })
+
   }
 });
 
