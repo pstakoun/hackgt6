@@ -135,41 +135,6 @@ const getGroupValues = (user, groupId, done) => {
 
 
 
-const getValues = (user, done) => {
-    const userArtists = [];
-    const userTracks = [];
-    const out = 'name'
-      getTopArtists(user, (err, body) => {
-        const cur = JSON.parse(body);
-        for (var i = 0; i < cur['limit']; i++) {
-            userArtists.push(cur['items'][i][out]);
-        }
-        console.log(userArtists);
-
-      });
-      getTopTracks(user, (err, body) => {
-        const cur = JSON.parse(body);
-        for (var i = 0; i < cur['limit']; i++) {
-            userTracks.push(cur['items'][i][out]);
-            const artist = cur['items'][i]['album']['artists'][0][out]
-            if (userArtists.indexOf(artist) == -1){
-               userArtists.push(artist);
-            }
-
-
-              //console.log(cur['items'][i]['album']['artists'][j][out]);
-              //console.log("AHPP")
-              //userArtists.push(artist);
-
-        }
-        console.log(userArtists);
-
-        console.log(userTracks);
-
-        done(err, body);
-      });
-
-  };
 
 
 exports.getMe = getMe;
@@ -178,4 +143,3 @@ exports.getTopTracks = getTopTracks;
 exports.getGroupTracks = getGroupTracks;
 exports.getGroupArtists = getGroupArtists;
 exports.getRecommendations = getRecommendations;
-exports.getValues = getValues;

@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const database = require('../services/database');
 const spotify = require('../services/spotify');
 
+const grouping = require('../services/grouping');
+
 passport.use(
   new SpotifyStrategy(
     {
@@ -149,7 +151,7 @@ router.get('/me/values', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    spotify.getValues(req.user, (err, body) => {
+    grouping.getValues(req.user, (err, body) => {
       res.json(body);
     });
   }
