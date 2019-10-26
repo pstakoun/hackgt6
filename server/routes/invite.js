@@ -1,4 +1,5 @@
 const express = require('express');
+const database = require('../services/database');
 const sms = require('../grpc/sms_client');
 
 const router = express.Router();
@@ -21,14 +22,16 @@ router.post('/', (req, res) => {
     // TODO: Include the user doing the inviting in the message body.
     // TODO: Also make the message body not a fucking meme.
     sms.createGroupInvite('Ape Benison invited you to join unknown product name #69! Join'
-      + ' using this link: ', JSON.parse(req.body.phoneNumbers)).then((response) => {
-      invites[response.getTokenId()] = {
-        phoneNumber: response.getPhoneNumber(),
-        invitedFrom: req.user,
-        expiration: response.getExpiration(),
-        group: req.body.group,
-      };
-      res.status(200).json({ message: response });
+      + ' using this link: ', JSON.parse(req.body.phoneNumbers)).then((responses) => {
+      for (const response of responses) {
+        invites[response.getTokenId()] = {
+          phoneNumber: response.getPhoneNumber(),
+          invitedFrom: req.user,
+          expiration: response.getExpiration(),
+          group: req.body.group,
+        };
+      }
+      res.status(200).json({ message: responses });
     });
   }
 });
@@ -40,7 +43,9 @@ router.get('/join/:token', (req, res) => {
   if (!invites[req.params.token]) {
     res.status(404).send({ message: 'fuck off cunt' });
   }
-  // TODO(Peter): Add the user to the group.
+  const invite = invites[req.params.token];
+  // TODO create user via spotify
+  // TODO add user to group
 });
 
 module.exports = router;
