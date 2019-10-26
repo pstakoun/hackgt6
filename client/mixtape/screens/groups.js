@@ -14,6 +14,7 @@ export default class groups extends React.Component {
 
   static navigationOptions = {
     title: 'Groups'
+
   };
 
   componentDidMount() {
@@ -30,7 +31,7 @@ export default class groups extends React.Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
           <View>
-            <GropuItem title={"Apes"} mood={"Crazy"}/>
+            <GropuItem id={'1234abcd'} title={"Apes"} mood={"Crazy"} navigation={this.props.navigation}/>
             <Button title={'Add Group'} onPress={() => this.props.navigation.navigate("NewGroup")}></Button>
           </View>
         </SafeAreaView>

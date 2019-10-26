@@ -24,6 +24,8 @@ export default class newGroup extends React.Component {
     title: 'New Group'
   };
 
+
+  //makes the group given the criteria
   makeGroup() {
     fetch('http://localhost:3000/groups', {
       method: 'POST',
@@ -31,6 +33,8 @@ export default class newGroup extends React.Component {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+
+      //edit this to choose what data you want in new group (the name and members are both in state)
       body: JSON.stringify({}),
     });
   }
@@ -70,7 +74,8 @@ export default class newGroup extends React.Component {
                        placeholder = "New Friend"
                        placeholderTextColor = "#D3D3D3"
                        autoCapitalize = "none"
-                       onChangeText = {this.handleMember}/>
+                       onChangeText = {this.handleMember}
+                       value={this.state.thisMember}/>
             <Button title={'Add Friend'} onPress={() => this.addFriend()}></Button>
             <Button title={'Add'} onPress={() => this.makeGroup()}></Button>
           </View>

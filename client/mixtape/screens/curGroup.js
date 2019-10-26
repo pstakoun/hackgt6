@@ -1,31 +1,162 @@
 // Main.js
 import React, {Fragment} from 'react'
 import {   SafeAreaView,
-  StyleSheet, Platform,   StatusBar,
-  Switch, Text, View , Button, Linking} from 'react-native'
-//import GropuItem from '../components/groupItem'
+           StyleSheet,
+           StatusBar,
+           Text,
+           View ,
+           Button,
+           Image,
+           Dimensions,
+           TouchableOpacity} from 'react-native'
+import global from '../style/global'
+import {Icon} from "react-native-elements";
 
-export default class curGroup extends React.Component {
+export default class groups extends React.Component {
   constructor(props) {
     super(props);
 
+    this.toggleDown = this.toggleDown.bind(this);
+    this.toggleUp = this.toggleUp.bind(this);
+
+    this.state = {
+      groupID: '',
+      name: 'Name',
+      mood: 'Mood',
+      isLiked: false,
+      isDisliked: false,
+      song: 'Faded',
+      artist: 'Alan Walker',
+      artURL: 'https://i.scdn.co/image/ab67616d0000b273c4d00cac55ae1b4598c9bc90'
+    }
+  }
+
+  static navigationOptions = {
+    title: 'Group',
+    headerStyle: {
+      backgroundColor: '#2F2F2F',
+      borderBottomColor: 'transparent',
+    },
+  };
+
+  componentDidMount() {
+    var id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
+    this.setState({groupID: id})
+    /*fetch('http://localhost:3000/groups')
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch(error => console.log(error.message));*/
+  }
+
+  addSong() {
+    //adds song to library for the given user
+  }
+
+  updatePoll() {
+    //updates the user's vote on a song when it is changed
+  }
+
+  toggleUp() {
+    var up = this.state.isLiked;
+    if (up) {
+      this.setState({isLiked: false})
+    } else {
+      this.setState({
+        isLiked: true,
+        isDisliked: false,
+      })
+    }
+    this.updatePoll()
+  }
+
+  toggleDown() {
+    var down = this.state.isDisliked;
+    if (down) {
+      this.setState({isDisliked: false})
+    } else {
+      this.setState({
+        isLiked: false,
+        isDisliked: true,
+      })
+    }
+    this.updatePoll()
   }
 
   render() {
 
     return (
-      <Fragment>
+      <View style={global.container}>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-
+          <View style={styles.container}>
+            <Image
+              source={{uri: 'https://i.scdn.co/image/ab67616d0000b273c4d00cac55ae1b4598c9bc90'}}
+              style={styles.albumArt}
+              resizeMode={"contain"}
+            />
+            <Text style={[global.fontColor, styles.song]}>{this.state.song}</Text>
+            <Text style={[global.fontColor, styles.artist]}>{this.state.artist}</Text>
+            <View style={[styles.rowContainer, {marginTop: 30}]}>
+              <View style={styles.arrowWrapper}>
+                <TouchableOpacity
+                  type="submit"
+                  onPress={() => this.toggleDown()}>
+                  <Icon name='arrow-down' type={'evilicon'} size={60} color= {this.state.isDisliked ? 'red' : 'white'}/>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                type="submit"
+                onPress={() => this.addSong()}>
+                <Text style={styles.plus}>+</Text>
+              </TouchableOpacity>
+              <View style={styles.arrowWrapper}>
+                <TouchableOpacity
+                  type="submit"
+                  onPress={() => this.toggleUp()}>
+                  <Icon name='arrow-up' type={'evilicon'} size={60} color= {this.state.isLiked ? 'green' : 'white'}/>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={[styles.rowContainer, {marginTop: 20}]}>
+            </View>
+          </View>
         </SafeAreaView>
-      </Fragment>
+      </View>
     );
   }
 }
 
+const MARGIN = 15;
+
 const styles = StyleSheet.create({
-  body: {
-    backgroundColor: '#FFFFFF',
+  container: {
+    marginTop: 40,
+    marginHorizontal: MARGIN
   },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  albumArt: {
+    width: Dimensions.get('window').width - MARGIN * 2,
+    height: Dimensions.get('window').width - MARGIN * 2,
+  },
+  song: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 20
+  },
+  artist: {
+    fontSize: 20,
+    marginTop: 2
+  },
+  plus: {
+    fontSize: 50,
+    color: 'white',
+    fontWeight: '200',
+    marginHorizontal: 70,
+  },
+  arrowWrapper: {
+    marginTop: 10
+  }
 });
