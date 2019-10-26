@@ -5,7 +5,7 @@ import "google/protobuf/timestamp.proto";
 
 // Service responsible for sending and managing invite SMS messages.
 service SMSService {
-    rpc CreateGroupInvite()
+    rpc CreateGroupInvite(GroupInvite) returns (InviteToken);
 }
 
 message GroupInvite {
