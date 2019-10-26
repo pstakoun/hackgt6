@@ -50,8 +50,8 @@ const getGroups = (userId, done) => {
   });
 };
 
-const createGroup = (userId, done) => {
-  Group.create({ owner: userId }, (err, group) => {
+const createGroup = (userId, name, done) => {
+  Group.create({ owner: userId, name }, (err, group) => {
     if (err) {
       done(err, group);
     } else {

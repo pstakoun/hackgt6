@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
-    database.createGroup(req.user.id, (err, group) => {
+    database.createGroup(req.user.id, req.body.name, (err, group) => {
       if (err) {
         res.json({ error: err });
       } else {
