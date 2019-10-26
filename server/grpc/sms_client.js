@@ -35,4 +35,4 @@ function createGroupInvite(messageBodyContent, phoneNumberList) {
 }
 
 initGRPC();
-createGroupInvite('mark is an ape', ['+18598064677']);
+exports.createGroupInvite = createGroupInvite;
