@@ -1,1 +1,4 @@
 node_modules/
+Podfile.lock
+mixtape.xcodeproj/
+mixtape.xcworkspace/

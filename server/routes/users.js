@@ -119,7 +119,6 @@ router.get('/me/top/tracks', (req, res) => {
   }
 });
 
-
 router.get('/me/values', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -140,4 +139,5 @@ router.post('/me/playlist/', (req, res) => {
     });
   }
 });
+
 module.exports = router;
