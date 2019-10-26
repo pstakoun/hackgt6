@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
           phoneNumber: response.getPhoneNumber(),
           invitedFrom: req.user,
           expiration: response.getExpiration(),
+          group: req.body.group,
         };
       }
       res.status(200).json({ message: responses });

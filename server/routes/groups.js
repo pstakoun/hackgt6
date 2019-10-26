@@ -1,6 +1,7 @@
 const express = require('express');
 const database = require('../services/database');
 const spotify = require('../services/spotify');
+const grouping = require('../services/grouping');
 
 const router = express.Router();
 
@@ -72,6 +73,18 @@ router.post('/:group/playlists', (req, res) => {
         } else {
           res.json(playlist);
         }
+      });
+      grouping.getValues(req.user, (err, values) => {
+        const opt = { seed_artists: '', seed_genres: '', seed_tracks: [] };
+        for (let i = 0; i < 5; i++) {
+          opt.seed_tracks.push(values.tracks[i]);
+        }
+        opt.seed_tracks = opt.seed_tracks.join(',');
+        spotify.getRecommendations(req.user, opt, (err, recommendations) => {
+          spotify.addToPlaylist(req.user, body.id, recommendations.tracks.map((t) => t.id), (err, done) => {
+            // TODO
+          });
+        });
       });
     });
   }

@@ -99,6 +99,7 @@ router.get('/me', (req, res) => {
   }
 });
 
+// For testing
 router.get('/me/top/artists', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -109,6 +110,7 @@ router.get('/me/top/artists', (req, res) => {
   }
 });
 
+// For testing
 router.get('/me/top/tracks', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -119,6 +121,7 @@ router.get('/me/top/tracks', (req, res) => {
   }
 });
 
+// For testing
 router.get('/me/values', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -129,6 +132,7 @@ router.get('/me/values', (req, res) => {
   }
 });
 
+// For testing
 router.post('/me/playlist/', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -140,6 +144,7 @@ router.post('/me/playlist/', (req, res) => {
   }
 });
 
+// For testing
 router.get('/me/recommendations', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
