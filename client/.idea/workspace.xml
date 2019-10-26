@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4da1553-a174-4774-90a2-0a16b169ce41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mixtape/components/groupItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/groups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mixtape/screens/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/webauth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/routes/users.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,22 +37,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="1553" />
+          <entry key="js" value="1558" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="1553" />
+          <entry key="JavaScript" value="1558" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="-48">
               <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
               <folding>
                 <element signature="e#11#48#0" expanded="true" />
@@ -63,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mixtape/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="545">
@@ -123,8 +121,8 @@
       <find>glob</find>
       <find>this</find>
       <find>authcode</find>
-      <find>webauth</find>
       <find>tipcard</find>
+      <find>webauth</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -137,10 +135,10 @@
         <option value="$PROJECT_DIR$/mixtape/screens/webauth.js" />
         <option value="$PROJECT_DIR$/mixtape/config.js" />
         <option value="$PROJECT_DIR$/mixtape/index.js" />
-        <option value="$PROJECT_DIR$/mixtape/screens/login.js" />
         <option value="$PROJECT_DIR$/mixtape/components/groupItem.js" />
         <option value="$PROJECT_DIR$/mixtape/screens/groups.js" />
         <option value="$PROJECT_DIR$/mixtape/App.js" />
+        <option value="$PROJECT_DIR$/mixtape/screens/login.js" />
       </list>
     </option>
   </component>
@@ -228,12 +226,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572052098807</updated>
-      <workItem from="1572052100078" duration="11083000" />
+      <workItem from="1572052100078" duration="11731000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11083000" />
+    <option name="totallyTimeSpent" value="11731000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -322,16 +320,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding>
-            <element signature="e#11#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mixtape/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="545">
@@ -339,6 +327,16 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="e#234#269#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mixtape/screens/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-48">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding>
+            <element signature="e#11#48#0" expanded="true" />
           </folding>
         </state>
       </provider>

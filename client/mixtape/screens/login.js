@@ -41,15 +41,7 @@ export default class login extends React.Component {
   }
   _handleOpenURL(event) {
     var code = event.url.split("code=")[1];
-    this.setState((state, props) =>
-      ({
-        authcode: code
-    }));
-    this.postAuthCode();
-  }
-
-  postAuthCode() {
-    fetch('http://localhost:3000/users/auth/spotify/authorize?code=' + this.state.authcode)
+    fetch('http://localhost:3000/users/auth/spotify/authorize?code=' + code)
       .then((response) => response.json())
       .then((data) => console.log(data));
   }
