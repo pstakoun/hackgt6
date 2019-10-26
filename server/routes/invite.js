@@ -1,4 +1,5 @@
 const express = require('express');
+const database = require('../services/database');
 const sms = require('../grpc/sms_client');
 
 const router = express.Router();
@@ -40,7 +41,8 @@ router.get('/join/:token', (req, res) => {
   if (!invites[req.params.token]) {
     res.status(404).send({ message: 'fuck off cunt' });
   }
-  // TODO(Peter): Add the user to the group.
+  const invite = invites[req.params.token];
+  // TODO
 });
 
 module.exports = router;

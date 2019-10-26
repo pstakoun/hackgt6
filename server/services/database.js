@@ -62,6 +62,12 @@ const createGroup = (userId, name, done) => {
   });
 };
 
+const addUserToGroup = (userId, groupId, done) => {
+  User.updateOne({ _id: userId }, { $push: { groups: groupId } }, (err, res) => {
+    done(err, res);
+  });
+};
+
 const getPlaylists = (groupId, done) => {
   Playlist.find({ group: groupId }, (err, playlists) => {
     if (err) {
@@ -107,6 +113,7 @@ exports.setUserSpotifyAuthCode = setUserSpotifyAuthCode;
 exports.updateUserTokensSpotify = updateUserTokensSpotify;
 exports.getGroups = getGroups;
 exports.createGroup = createGroup;
+exports.addUserToGroup = addUserToGroup;
 exports.getPlaylists = getPlaylists;
 exports.getPlaylist = getPlaylist;
 exports.createPlaylist = createPlaylist;
