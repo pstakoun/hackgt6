@@ -6,8 +6,9 @@ let client;
 
 function initGRPC() {
   try {
-    client = new services.SMSServiceClient('localhost:50051',
+    client = new services.SMSServiceClient('127.0.0.1:50051',
       grpc.credentials.createInsecure());
+    console.log('connected');
   } catch (e) {
     console.warn('Unable to connect to the SMS microservice.');
   }
@@ -28,6 +29,7 @@ function createGroupInvite(messageBodyContent, phoneNumberList) {
       // right now the response is not being handled.
       // TODO(Drake): Actually fucking implement it.
       if (err) {
+        console.error(err);
         reject(err);
       }
       resolve(response.getInvitesList());
