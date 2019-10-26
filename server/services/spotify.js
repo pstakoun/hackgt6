@@ -39,10 +39,10 @@ const getMe = (user, done) => {
 };
 
 const getTopArtists = (user, options, done) => {
-  var opt = Object.keys(options).map(key => key + '=' + options[key]).join('&');
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
 
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/artists?' + opt, {
+    request.get(`https://api.spotify.com/v1/me/top/artists?${opt}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -53,9 +53,9 @@ const getTopArtists = (user, options, done) => {
 };
 
 const getTopTracks = (user, options, done) => {
-  var opt = Object.keys(options).map(key => key + '=' + options[key]).join('&');
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/tracks?'+opt, {
+    request.get(`https://api.spotify.com/v1/me/top/tracks?${opt}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -64,7 +64,7 @@ const getTopTracks = (user, options, done) => {
     });
   });
 };
-
+/*
 const getRecommendations = (user, param, done) => {
   getToken(user, (err, body) => {
     request.get('https://api.spotify.com/v1/recommendations', {
@@ -76,7 +76,7 @@ const getRecommendations = (user, param, done) => {
     });
   });
 };
-
+*/
 const getGroupTracks = (groupId, done) => {
   database.findUsersInGroup(groupId, (err, users) => {
     const userResults = [];
@@ -140,4 +140,3 @@ exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;
 exports.getGroupTracks = getGroupTracks;
 exports.getGroupArtists = getGroupArtists;
-exports.getRecommendations = getRecommendations;

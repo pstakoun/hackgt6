@@ -31,7 +31,6 @@ const getValues = (user, done) => {
             userArtists.push(artist);
           }
         }
-
         // console.log(cur['items'][i]['album']['artists'][j][out]);
         // console.log("AHPP")
         // userArtists.push(artist);

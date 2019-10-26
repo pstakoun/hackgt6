@@ -118,33 +118,6 @@ router.get('/me/top/tracks', (req, res) => {
   }
 });
 
-router.get('/me/recommendations', (req, res) => {
-  if (!req.user) {
-    res.json({ error: 'Not authorized' });
-  } else {
-    spotify.getTopTracks(req.user, (err, body) => {
-      const dat = JSON.parse(body);
-      /* for (var prop in dat) {
-      console.log("Key:" + prop);
-        console.log("Value:" + dat[prop]);
-      }
-      console.log(dat['items']['0']['name']); */
-      seed_tracks = [];
-
-      for (let i = 0; i < 5; i++) {
-        seed_tracks.push(dat.items[i].id);
-      }
-      const into = { seed_tracks };
-      spotify.getRecommendations(req.user, (err, into) => {
-        const data2 = JSON.parse(into);
-        for (let i = 0; i < 5; i++) {
-          seed_tracks.push(dat.items[i].id);
-        }
-        res.json(into);
-      });
-    });
-  }
-});
 
 
 router.get('/me/values', (req, res) => {
