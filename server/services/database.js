@@ -84,6 +84,16 @@ const createGroupPlaylist = (groupId, done) => {
   });
 };
 
+const findUsersInGroup = (groupId, done) => {
+  User.find({ groups: groupId }, (err, users) => {
+    if (err) {
+      done(err, null);
+    } else {
+      done(err, users);
+    }
+  });
+};
+
 exports.getUser = getUser;
 exports.getUserSpotify = getUserSpotify;
 exports.createUserSpotify = createUserSpotify;
@@ -93,3 +103,4 @@ exports.getGroups = getGroups;
 exports.createGroup = createGroup;
 exports.getGroupPlaylists = getGroupPlaylists;
 exports.createGroupPlaylist = createGroupPlaylist;
+exports.findUsersInGroup = findUsersInGroup;

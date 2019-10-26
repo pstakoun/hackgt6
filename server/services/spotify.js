@@ -1,4 +1,5 @@
 const request = require('request');
+const database = require('../services/database');
 
 const clientId = '1eaa04d6551348fa84e7966990e45aeb';
 const clientSecret = '77f351092ac34ba7af26b9311be33c16';
@@ -61,6 +62,36 @@ const getTopTracks = (user, done) => {
   });
 };
 
+const getGroupTracks = (groupId, done) => {
+  database.findUsersInGroup(groupId, (err, users) => {
+    const userResults = [];
+    users.forEach((user) => {
+      getTopTracks(user, (err, body) => {
+        userResults.push(body);
+        if (userResults.length === users.length) {
+          // TODO
+        }
+      });
+    });
+  });
+};
+
+const getGroupArtists = (user, groupId, done) => {
+  database.findUsersInGroup(groupId, (err, users) => {
+    const userResults = [];
+    users.forEach((user) => {
+      getTopArtists(user, (err, body) => {
+        userResults.push(body);
+        if (userResults.length === users.length) {
+          // TODO
+        }
+      });
+    });
+  });
+};
+
 exports.getMe = getMe;
 exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;
+exports.getGroupTracks = getGroupTracks;
+exports.getGroupArtists = getGroupArtists;
