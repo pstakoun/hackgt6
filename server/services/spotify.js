@@ -132,11 +132,6 @@ const getGroupValues = (user, groupId, done) => {
 */
 
 
-
-
-
-
-
 exports.getMe = getMe;
 exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;

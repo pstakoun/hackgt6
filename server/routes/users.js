@@ -124,21 +124,21 @@ router.get('/me/recommendations', (req, res) => {
   } else {
     spotify.getTopTracks(req.user, (err, body) => {
       const dat = JSON.parse(body);
-      /*for (var prop in dat) {
+      /* for (var prop in dat) {
       console.log("Key:" + prop);
         console.log("Value:" + dat[prop]);
       }
-      console.log(dat['items']['0']['name']);*/
+      console.log(dat['items']['0']['name']); */
       seed_tracks = [];
 
-      for (var i = 0; i < 5; i++) {
-          seed_tracks.push(dat['items'][i]['id']);
+      for (let i = 0; i < 5; i++) {
+        seed_tracks.push(dat.items[i].id);
       }
-      var into = { 'seed_tracks' : seed_tracks };
+      const into = { seed_tracks };
       spotify.getRecommendations(req.user, (err, into) => {
         const data2 = JSON.parse(into);
-        for (var i = 0; i < 5; i++) {
-            seed_tracks.push(dat['items'][i]['id']);
+        for (let i = 0; i < 5; i++) {
+          seed_tracks.push(dat.items[i].id);
         }
         res.json(into);
       });
@@ -168,7 +168,7 @@ router.get('/me/recommendations', (req, res) => {
       });
     //});
   }
-});*/
+}); */
 
 router.post('/group/top/tracks', (req, res) => {
   if (!req.user) {
