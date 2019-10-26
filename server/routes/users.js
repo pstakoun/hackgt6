@@ -14,7 +14,7 @@ passport.use(
       callbackURL: 'http://localhost:3000/users/auth/spotify/callback',
     },
     ((accessToken, refreshToken, expires_in, profile, done) => {
-      database.createUserSpotify(profile.id, done);
+      database.createUserSpotify(profile, done);
     }),
   ),
 );
