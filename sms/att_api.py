@@ -5,42 +5,52 @@ Handling errors is a good practice in general, but especially important
 when dealing with ass goblins like AT&T.
 """
 import requests
+import jwt
 
-APP_KEY = 'PENIS'
-APP_SECRET = 'APE'
 
-API_SCOPES = 'SMS'
+CLIENT_ID = 'PRIV-hackgt1.qt9t.yeehaw'
+CLIENT_SECRET = 'd42a3eb0-f8bd-48ee-87b9-b5c5c4fe36a8'
 
 access_token = ''
 refresh_token = ''
+user_id = ''
 
 
 def get_access_token():
     """This also returns expires_in"""
-    response = requests.post('https://api.att.com/oauth/v4/token',
-                             headers={'Accept': 'application/json'},
+    response = requests.post('https://oauth-cpaas.att.com/cpaas/auth/v1/token',
+                             headers={'Accept': 'application/json',
+                                      'Content-Type': 'application/x-www-form-urlencoded'},
                              data={
-                                 'client_id': f'{APP_KEY}',
-                                 'client_secret': f'{APP_SECRET}',
+                                 'client_secret': CLIENT_SECRET,
+                                 'client_id': CLIENT_ID,
                                  'grant_type': 'client_credentials',
-                                 'scope': f'{API_SCOPES}'
+                                 'scope': 'openid'
                              })
     json_response = response.json()
     global access_token
-    access_token = json_response.access_token
+    access_token = json_response['access_token']
     global refresh_token
-    refresh_token = json_response.refresh_token
+    refresh_token = json_response['refresh_token']
+
+    id = json_response['id_token']
+    decoded = jwt.decode(id, verify=False)
+    global user_id
+    user_id = decoded['preferred_username']
 
 
 def send_message(phone_number, message):
     if not access_token:
         get_access_token()
-    response = requests.post('https://api.att.com/sms/v3/messaging/outbox',
-                             headers={'Accept': 'application/json',
-                                      'Content-Type': 'application/json',
+
+    response = requests.post(f'https://oauth-cpaas.att.com/cpaas/smsmessaging/v1/{user_id}/outbound/+14044580498/requests',
+                             headers={'Content-Type': 'application/json',
                                       'Authorization': f'Bearer {access_token}'},
-                             data={'outboundSMSRequest': {
-                                 'address': phone_number,
-                                 'message': message
-                             }}
+                             json={'outboundSMSMessageRequest': {
+                                 'address': [phone_number],
+                                 'clientCorrelator': CLIENT_ID,
+                                 'outboundSMSTextMessage': {
+                                     'message': message
+                                 }
+                             }},
                              )

@@ -38,9 +38,10 @@ const getMe = (user, done) => {
   });
 };
 
-const getTopArtists = (user, done) => {
+const getTopArtists = (user, options, done) => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/artists', {
+    request.get(`https://api.spotify.com/v1/me/top/artists?${opt}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -50,9 +51,52 @@ const getTopArtists = (user, done) => {
   });
 };
 
-const getTopTracks = (user, done) => {
+
+const getRecommendations = (user, options, done) => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/me/top/tracks', {
+    request.get(`https://api.spotify.com/v1/recommendations?${opt}`, {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, JSON.parse(body));
+    });
+  });
+};
+
+const createPlaylist = (user, options, done) => {
+  getToken(user, (err, body) => {
+    request.post(`https://api.spotify.com/v1/users/${user.spotifyId}/playlists`, {
+      json: options,
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+
+const addToPlaylist = (user, playlist, tracks, done) => {
+  getToken(user, (err, body) => {
+    request.post(`https://api.spotify.com/v1/playlists/${playlist}/tracks`, {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+      json: {
+        uris: tracks.map((t) => `spotify:track:${t}`),
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+
+const getTopTracks = (user, options, done) => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
+  getToken(user, (err, body) => {
+    request.get(`https://api.spotify.com/v1/me/top/tracks?${opt}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -90,6 +134,7 @@ const getGroupArtists = (user, groupId, done) => {
   });
 };
 
+
 const playPlaylist = (user, id, done) => {
   getToken(user, (err, body) => {
     request.put('https://api.spotify.com/v1/me/player/play', {
@@ -105,9 +150,13 @@ const playPlaylist = (user, id, done) => {
   });
 };
 
+
 exports.getMe = getMe;
 exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;
 exports.getGroupTracks = getGroupTracks;
 exports.getGroupArtists = getGroupArtists;
 exports.playPlaylist = playPlaylist;
+exports.createPlaylist = createPlaylist;
+exports.addToPlaylist = addToPlaylist;
+exports.getRecommendations = getRecommendations;

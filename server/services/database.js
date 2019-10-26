@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const Group = require('../models/group');
-const GroupPlaylist = require('../models/group-playlist');
+const Playlist = require('../models/playlist');
 
 mongoose.connect('mongodb+srv://hackUser:hackpassword@cluster0-cixj1.gcp.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -62,29 +62,29 @@ const createGroup = (userId, name, done) => {
   });
 };
 
-const getGroupPlaylists = (groupId, done) => {
-  GroupPlaylist.find({ group: groupId }, (err, groupPlaylists) => {
+const getPlaylists = (groupId, done) => {
+  Playlist.find({ group: groupId }, (err, playlists) => {
     if (err) {
       done(err, null);
     } else {
-      done(err, groupPlaylists);
+      done(err, playlists);
     }
   });
 };
 
-const getGroupPlaylist = (id, done) => {
-  GroupPlaylist.findById(id, (err, groupPlaylist) => {
-    done(err, groupPlaylist);
+const getPlaylist = (id, done) => {
+  Playlist.findById(id, (err, playlist) => {
+    done(err, playlist);
   });
 };
 
-const createGroupPlaylist = (groupId, done) => {
-  GroupPlaylist.create({ group: groupId }, (err, groupPlaylist) => {
+const createPlaylist = (groupId, spotifyId, done) => {
+  Playlist.create({ group: groupId, spotifyId }, (err, playlist) => {
     if (err) {
       done(err, null);
     } else {
-      Group.updateOne({ _id: groupId }, { $push: { playlists: groupPlaylist._id } }, (err, res) => {
-        done(err, groupPlaylist);
+      Group.updateOne({ _id: groupId }, { $push: { playlists: playlist._id } }, (err, res) => {
+        done(err, playlist);
       });
     }
   });
@@ -107,7 +107,7 @@ exports.setUserSpotifyAuthCode = setUserSpotifyAuthCode;
 exports.updateUserTokensSpotify = updateUserTokensSpotify;
 exports.getGroups = getGroups;
 exports.createGroup = createGroup;
-exports.getGroupPlaylists = getGroupPlaylists;
-exports.getGroupPlaylist = getGroupPlaylist;
-exports.createGroupPlaylist = createGroupPlaylist;
+exports.getPlaylists = getPlaylists;
+exports.getPlaylist = getPlaylist;
+exports.createPlaylist = createPlaylist;
 exports.findUsersInGroup = findUsersInGroup;

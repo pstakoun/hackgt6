@@ -23,12 +23,17 @@ function createGroupInvite(messageBodyContent, phoneNumberList) {
   const request = new messages.GroupInvite();
   request.setInvitePhoneNumList(phoneNumberList);
   request.setBody(messageBodyContent);
-  client.createGroupInvite(request, (err, response) => {
-    // right now the response is not being handled.
-    // TODO(Drake): Actually fucking implement it.
-    console.log(response.getTokenId());
+  return new Promise((resolve, reject) => {
+    client.createGroupInvite(request, (err, response) => {
+      // right now the response is not being handled.
+      // TODO(Drake): Actually fucking implement it.
+      if (err) {
+        reject(err);
+      }
+      resolve(response.getInvitesList());
+    });
   });
 }
 
 initGRPC();
-createGroupInvite('fuk', ['1', '2']);
+exports.createGroupInvite = createGroupInvite;
