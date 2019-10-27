@@ -39,7 +39,6 @@ router.post('/', (req, res) => {
  * Join a group with an invite code.
  */
 router.get('/join/:token', (req, res) => {
-  invites[req.params.token] = { group: 'test' }; // For testing
   if (!invites[req.params.token]) {
     res.status(404).send({ message: 'Invalid token' });
   } else {
