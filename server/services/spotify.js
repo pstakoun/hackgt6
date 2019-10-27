@@ -1,5 +1,6 @@
 const request = require('request');
 const database = require('../services/database');
+const User = require('../models/user');
 
 const clientId = '1eaa04d6551348fa84e7966990e45aeb';
 const clientSecret = '77f351092ac34ba7af26b9311be33c16';
@@ -33,7 +34,13 @@ const getMe = (user, done) => {
         Authorization: `Bearer ${body.access_token}`,
       },
     }, (err, res, body) => {
-      done(err, body);
+      if (!User.findById(user.id).spotifyId) {
+        User.updateOne({ _id: user.id }, { spotifyId: JSON.parse(body).id }, (err, x) => {
+          done(err, body);
+        });
+      } else {
+        done(err, body);
+      }
     });
   });
 };
@@ -102,6 +109,8 @@ const getRecommendations = (user, options, done) => {
 
 const createPlaylist = (user, options, done) => {
   getToken(user, (err, body) => {
+    console.log(body);
+    console.log(user);
     request.post(`https://api.spotify.com/v1/users/${user.spotifyId}/playlists`, {
       json: options,
       headers: {
@@ -123,6 +132,7 @@ const addToPlaylist = (user, playlist, tracks, done) => {
         uris: tracks.map((t) => `spotify:track:${t}`),
       },
     }, (err, res, body) => {
+      console.log(body);
       done(err, body);
     });
   });
