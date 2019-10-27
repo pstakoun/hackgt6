@@ -80,15 +80,21 @@ router.post('/:group/playlists', (req, res) => {
           opt.seed_tracks.push(values.tracks[i]);
         }
         opt.seed_tracks = opt.seed_tracks.join(',');
+        grouping.getGroupAverage(req.user, req.params.group, (group) => {
+
+        Object.keys(group).forEach( function(key) {
+           opt["target_" + key] = group[key];
+        });
         spotify.getRecommendations(req.user, opt, (err, recommendations) => {
           spotify.addToPlaylist(req.user, body.id, recommendations.tracks.map((t) => t.id), (err, done) => {
             // TODO
           //  addToPlaylist = (user, playlist, tracks,
-            res(done);
           });
         });
+        });
       });
-    });
+
+      });
   }
 });
 
@@ -115,6 +121,7 @@ router.post('/:group/playlistFinal', (req, res) => {
           console.log(recommendations);
           spotify.addToPlaylist(req.user, body.id, recommendations.tracks.map((t) => t.id), (err, done) => {
             // TODO
+            res.json(done);
           });
         });
       });
