@@ -31,6 +31,7 @@ export default class groups extends React.Component {
       artist: '',
       artURL: '',
       added: false,
+      playlistID: '',
     }
   }
 
@@ -55,12 +56,36 @@ export default class groups extends React.Component {
   componentDidMount() {
     const _id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
     this.setState({groupID: _id});
+    this.startPlaylist();
     this.props.navigation.setParams({ invite: this._invite });
     this.timer = setInterval(()=> this.getTrack(), 3000);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer)
+  }
+
+  startPlaylist() {
+    fetch(`http://localhost:3000/groups/${this.state.groupID}/playlists`)
+      .then((response) => response.json())
+      .then((data) => this.setState({playlistID: data[0]._id}))
+      .catch(error => console.log(error.message));
+
+    fetch(`http://localhost:3000/groups/${this.state.groupID}/playlists/${this.state.playlistID}/play`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      //edit this to choose what data you want in new group (the name and members are both in state)
+      body: JSON.stringify({
+        invites: this.state.members,
+        group: this.state.groupID
+      }),
+    })
+      .then((response) => response.json())
+      .then(() => this.props.navigation.navigate('CurGroup', {id: this.state.groupID, first: false}))
+      .catch(error => console.log(error.message))
   }
 
   getTrack() {
@@ -134,6 +159,7 @@ export default class groups extends React.Component {
         body: JSON.stringify({}),
       })
       .then((response) => response.json())
+      .then((data) => this.setState({isDisliked: false, isLiked: false}))
       .catch(error => console.log(error.message));
     }
     this.updatePoll()

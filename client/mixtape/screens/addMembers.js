@@ -44,10 +44,6 @@ export default class addMembers extends React.Component {
     this.setState({groupID: _id});
     console.log(_id);
     this.props.navigation.setParams({ sendInvite: this._sendInvite });
-    /*fetch('http://localhost:3000/groups')
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch(error => console.log(error.message));*/
   }
 
   _sendInvite = () => {
@@ -89,14 +85,18 @@ export default class addMembers extends React.Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
           <View style={styles.container}>
-            <TextInput style = {[styles.input, global.fontColor]}
-                       underlineColorAndroid = "transparent"
-                       placeholder = "New Member"
-                       placeholderTextColor = "#727272"
-                       autoCapitalize = "none"
-                       onChangeText = {this.handleMember}
-                       value={this.state.thisMember}/>
-            <Button title={'Add Member'} onPress={() => this.addMember()}></Button>
+            <View style={[styles.rowContainer, {marginTop: 20}]}>
+              <TextInput style = {[styles.input, global.fontColor]}
+                         underlineColorAndroid = "transparent"
+                         placeholder = "New Member"
+                         placeholderTextColor = "#727272"
+                         autoCapitalize = "none"
+                         onChangeText = {this.handleMember}
+                         value={this.state.thisMember}/>
+              <TouchableOpacity style={styles.addIcon} onPress={() => this.addMember()}>
+                <Icon name='plus' type={'evilicon'} size={30} color={"#007bff"}/>
+              </TouchableOpacity>
+            </View>
             <FlatList
               data={this.state.members}
               renderItem={({item}) =>
@@ -119,7 +119,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: MARGIN
   },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   input: {
     fontSize: 20,
+    borderBottomWidth: 1,
+    borderColor: 'white',
+    flex: 1,
+    marginBottom: 20
+  },
+  addIcon: {
+    marginLeft: 10
   }
 });
