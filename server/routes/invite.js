@@ -1,5 +1,5 @@
 const express = require('express');
-const database = require('../services/database');
+const phone = require('phone');
 const sms = require('../grpc/sms_client');
 
 const router = express.Router();
@@ -18,15 +18,13 @@ router.post('/', (req, res) => {
   } else if (!req.body.phoneNumbers) {
     res.status(400).json({ error: 'Request body missing phone numbers.' });
   } else {
-    // TODO: Validate the phone numbers are in the following format: +11234567890
-    // TODO: Include the user doing the inviting in the message body.
-    // TODO: Also make the message body not a fucking meme.
-    sms.createGroupInvite('Ape Benison invited you to join unknown product name #69! Join'
-      + ' using this link: ', JSON.parse(req.body.phoneNumbers)).then((responses) => {
+    const phoneNumbers = JSON.parse(req.body.phoneNumbers).filter((s) => phone(s)).map((s) => phone(s)[0]);
+    sms.createGroupInvite('You have been invited to join Mixtape! Access your account now at: ',
+      JSON.parse(req.body.phoneNumbers)).then((responses) => {
       for (const response of responses) {
         invites[response.getTokenId()] = {
           phoneNumber: response.getPhoneNumber(),
-          invitedFrom: req.user,
+          invitedFrom: req.user.id,
           expiration: response.getExpiration(),
           group: req.body.group,
         };
@@ -40,12 +38,15 @@ router.post('/', (req, res) => {
  * Join a group with an invite code.
  */
 router.get('/join/:token', (req, res) => {
+  invites[req.params.token] = { group: 'test' }; // For testing
   if (!invites[req.params.token]) {
     res.status(404).send({ message: 'fuck off cunt' });
+  } else {
+    const invite = invites[req.params.token];
+    // TODO create user
+    // TODO add user to group
+    res.redirect('/users/auth/spotify');
   }
-  const invite = invites[req.params.token];
-  // TODO create user via spotify
-  // TODO add user to group
 });
 
 module.exports = router;
