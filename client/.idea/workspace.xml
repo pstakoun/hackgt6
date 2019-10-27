@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4da1553-a174-4774-90a2-0a16b169ce41" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/addMembers.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/addMembers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/curGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/curGroup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/groups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixtape/screens/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/screens/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mixtape/ios/mixtape.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/ios/mixtape.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mixtape/ios/mixtape/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/mixtape/ios/mixtape/Info.plist" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -142,7 +140,7 @@
         <entry file="file://$PROJECT_DIR$/mixtape/components/listItem.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -433,7 +431,7 @@
     <entry file="file://$PROJECT_DIR$/mixtape/components/listItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
