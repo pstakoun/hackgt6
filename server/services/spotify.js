@@ -81,8 +81,8 @@ const saveTrack = (user, track, done) => {
   });
 };
 
-const getTopArtists =  (user, options, done) => {
-const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
+const getTopArtists = (user, options, done) => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
     request.get(`https://api.spotify.com/v1/me/top/artists?${opt}`, {
       headers: {
