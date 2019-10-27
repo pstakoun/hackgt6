@@ -67,6 +67,7 @@ router.post('/:group/playlists', (req, res) => {
   } else {
     const opts = { name: req.params.group, public: false, collaborative: true };
     spotify.createPlaylist(req.user, opts, (err, body) => {
+      console.log(body);
       database.createPlaylist(req.params.group, body.id, (err, playlist) => {
         if (err) {
           res.json({ error: err });

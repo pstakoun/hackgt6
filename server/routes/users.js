@@ -137,6 +137,10 @@ router.post('/me/current/save', (req, res) => {
     res.json({ error: 'Not authorized' });
   } else {
     spotify.getCurrentTrack(req.user, (err, body) => {
+      if (err || !body || !JSON.parse(body).item) {
+        res.json({});
+        return;
+      }
       spotify.saveTrack(req.user, JSON.parse(body).item.id, (err, result) => {
         res.json(result);
       });

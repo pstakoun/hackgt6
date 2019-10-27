@@ -41,18 +41,36 @@ export default class groups extends React.Component {
     Alert.prompt(
       'Create Group', null, (text) => {
         if (text.length > 0) {
-          fetch('http://localhost:3000/groups', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            //edit this to choose what data you want in new group (the name and members are both in state)
-            body: JSON.stringify({name: text}),
-          })
+          fetch('http://localhost:3000/users/me')
             .then((response) => response.json())
-            .then((data) => this.makeRoutes(data))
-            .catch(error => console.log(error.message));
+            .then((d) => {
+              console.log(d);
+              fetch('http://localhost:3000/groups', {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                //edit this to choose what data you want in new group (the name and members are both in state)
+                body: JSON.stringify({name: text}),
+              })
+                .then((response) => response.json())
+                .then((groupdata) => {
+                  fetch('http://localhost:3000/groups/' + groupdata._id + '/playlists', {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json',
+                    },
+                  })
+                    .then((response) => response.json())
+                    .then((data) => {
+                      this.makeRoutes(groupdata)
+                    })
+                    .catch(error => console.log(error.message));
+                })
+                .catch(error => console.log(error.message));
+            })
         }
       }
     );
