@@ -1,6 +1,7 @@
 const express = require('express');
 const phone = require('phone');
 const sms = require('../grpc/sms_client');
+const database = require('../services/database');
 
 const router = express.Router();
 
@@ -40,12 +41,15 @@ router.post('/', (req, res) => {
 router.get('/join/:token', (req, res) => {
   invites[req.params.token] = { group: 'test' }; // For testing
   if (!invites[req.params.token]) {
-    res.status(404).send({ message: 'fuck off cunt' });
+    res.status(404).send({ message: 'Invalid token' });
   } else {
     const invite = invites[req.params.token];
-    // TODO create user
-    // TODO add user to group
-    res.redirect('/users/auth/spotify');
+    database.createUser({ groups: [invite.group] }, (err, user) => {
+      req.login(user, (err) => {
+        if (err) { return next(err); }
+        return res.redirect('/users/auth/spotify');
+      });
+    });
   }
 });
 

@@ -20,6 +20,12 @@ const getUserSpotify = (id, done) => {
   });
 };
 
+const createUser = (data, done) => {
+  User.create(data, (err, user) => {
+    done(err, user);
+  });
+};
+
 const createUserSpotify = (profile, done) => {
   User.create({ spotifyId: profile.id }, (err, user) => {
     done(err, user);
@@ -108,6 +114,7 @@ const findUsersInGroup = (groupId, done) => {
 
 exports.getUser = getUser;
 exports.getUserSpotify = getUserSpotify;
+exports.createUser = createUser;
 exports.createUserSpotify = createUserSpotify;
 exports.setUserSpotifyAuthCode = setUserSpotifyAuthCode;
 exports.updateUserTokensSpotify = updateUserTokensSpotify;

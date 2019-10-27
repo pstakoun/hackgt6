@@ -19,7 +19,7 @@ const getValues = (user, done) => {
         }
       }
     }
-    spotify.getTopTracks(user, (err, body) => {
+    spotify.getTopTracks(user, option, (err, body) => {
       const cur = JSON.parse(body);
       for (let i = 0; i < cur.limit; i++) {
         userTracks.push(cur.items[i][out]);

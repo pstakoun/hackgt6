@@ -47,6 +47,8 @@ router.get('/auth/spotify', passport.authenticate('spotify',
     scope: [
       'user-read-email',
       'user-read-private',
+      'user-read-currently-playing',
+      'user-read-playback-state',
       'user-top-read',
       'user-modify-playback-state',
       'playlist-modify-private',
@@ -94,7 +96,10 @@ router.get('/me', (req, res) => {
     res.json({ error: 'Not authorized' });
   } else {
     spotify.getMe(req.user, (err, body) => {
-      res.json(body);
+      res.json({
+        database: req.user,
+        spotify: body,
+      });
     });
   }
 });
