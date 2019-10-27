@@ -39,6 +39,7 @@ class SMSServer(sms_pb2_grpc.SMSServiceServicer):
 
 
 def serve():
+    print('Starting SMS Microservice.')
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     sms_pb2_grpc.add_SMSServiceServicer_to_server(SMSServer(), server)
     server.add_insecure_port('[::]:50051')

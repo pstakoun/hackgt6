@@ -6,7 +6,6 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 const bodyParser = require('body-parser');
 const database = require('../services/database');
 const spotify = require('../services/spotify');
-
 const grouping = require('../services/grouping');
 
 passport.use(
@@ -22,6 +21,7 @@ passport.use(
           database.createUserSpotify(profile, done);
         } else {
           database.updateUserTokensSpotify(profile, accessToken, refreshToken, (err, res) => {
+            database.generateSongSetIfNotExists(user);
             done(err, user);
           });
         }
@@ -47,20 +47,32 @@ router.get('/auth/spotify', passport.authenticate('spotify',
     scope: [
       'user-read-email',
       'user-read-private',
+      'user-read-currently-playing',
+      'user-read-playback-state',
       'user-top-read',
       'user-modify-playback-state',
       'playlist-modify-private',
       'playlist-modify-public',
       'playlist-read-collaborative',
       'playlist-read-private',
+      'user-library-modify',
     ],
   }), (req, res) => {
 });
 
 router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/users/auth/spotify' }), (req, res) => {
-  database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
-    res.redirect('/users/me');
-  });
+  if (req.session.inviteGroup) {
+    database.addUserToGroup(req.user.id, req.session.inviteGroup, (err, result) => {
+      req.session.inviteGroup = null;
+      database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
+        res.redirect('/users/me');
+      });
+    });
+  } else {
+    database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
+      res.redirect('/users/me');
+    });
+  }
 });
 
 router.get('/auth/spotify/authorize', (req, res) => {
@@ -69,8 +81,16 @@ router.get('/auth/spotify/authorize', (req, res) => {
       res.json(user);
     });
   } else {
-    database.createUserSpotify({}, (err, user) => {
-      database.setUserSpotifyAuthCode(user.id, req.query.code, (err, result) => {
+    database.createUser({ spotifyAccessToken: req.query.token }, (err, user) => {
+      req.login(user, (err) => {
+        if (err) {
+          console.log(err);
+          res.send('Error');
+        } else {
+          res.json(user);
+        }
+      });
+      /* database.setUserSpotifyAuthCode(user.id, req.query.code, (err, result) => {
         req.login(user, (err) => {
           if (err) {
             console.log(err);
@@ -79,7 +99,7 @@ router.get('/auth/spotify/authorize', (req, res) => {
             res.json(user);
           }
         });
-      });
+      }); */
     });
   }
 });
@@ -94,11 +114,47 @@ router.get('/me', (req, res) => {
     res.json({ error: 'Not authorized' });
   } else {
     spotify.getMe(req.user, (err, body) => {
+      res.json({
+        database: req.user,
+        spotify: body,
+      });
+    });
+  }
+});
+
+router.get('/me/current', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getCurrentTrack(req.user, (err, body) => {
       res.json(body);
     });
   }
 });
 
+router.post('/me/current/save', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getCurrentTrack(req.user, (err, body) => {
+      spotify.saveTrack(req.user, JSON.parse(body).item.id, (err, result) => {
+        res.json(result);
+      });
+    });
+  }
+});
+
+router.post('/me/skip', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.skipTrack(req.user, (err, body) => {
+      res.json(body);
+    });
+  }
+});
+
+// For testing
 router.get('/me/top/artists', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -109,6 +165,7 @@ router.get('/me/top/artists', (req, res) => {
   }
 });
 
+// For testing
 router.get('/me/top/tracks', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -119,7 +176,7 @@ router.get('/me/top/tracks', (req, res) => {
   }
 });
 
-
+// For testing
 router.get('/me/values', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
@@ -130,7 +187,8 @@ router.get('/me/values', (req, res) => {
   }
 });
 
-router.post('/me/playlist/', (req, res) => {
+// For testing
+router.post('/me/playlist', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
@@ -141,7 +199,7 @@ router.post('/me/playlist/', (req, res) => {
   }
 });
 
-
+// For testing
 router.get('/me/recommendations', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });

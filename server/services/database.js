@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+const spotify = require('./spotify');
 const User = require('../models/user');
 const Group = require('../models/group');
 const Playlist = require('../models/playlist');
+const SongSet = require('../models/song-set');
 
 mongoose.connect('mongodb+srv://hackUser:hackpassword@cluster0-cixj1.gcp.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -16,6 +18,12 @@ const getUser = (id, done) => {
 
 const getUserSpotify = (id, done) => {
   User.findOne({ spotifyId: id }, (err, user) => {
+    done(err, user);
+  });
+};
+
+const createUser = (data, done) => {
+  User.create(data, (err, user) => {
     done(err, user);
   });
 };
@@ -62,6 +70,12 @@ const createGroup = (userId, name, done) => {
   });
 };
 
+const addUserToGroup = (userId, groupId, done) => {
+  User.updateOne({ _id: userId }, { $push: { groups: groupId } }, (err, res) => {
+    done(err, res);
+  });
+};
+
 const getPlaylists = (groupId, done) => {
   Playlist.find({ group: groupId }, (err, playlists) => {
     if (err) {
@@ -100,14 +114,27 @@ const findUsersInGroup = (groupId, done) => {
   });
 };
 
+const generateSongSetIfNotExists = (user) => {
+  SongSet.find({ user: user._id }, (err, doc) => {
+    if (doc === []) {
+      spotify.getTopTracks(user, { limit: 50 }, (err, result) => {
+        SongSet.create({ date: new Date(), user, songs: result.items });
+      });
+    }
+  });
+};
+
 exports.getUser = getUser;
 exports.getUserSpotify = getUserSpotify;
+exports.createUser = createUser;
 exports.createUserSpotify = createUserSpotify;
 exports.setUserSpotifyAuthCode = setUserSpotifyAuthCode;
 exports.updateUserTokensSpotify = updateUserTokensSpotify;
 exports.getGroups = getGroups;
 exports.createGroup = createGroup;
+exports.addUserToGroup = addUserToGroup;
 exports.getPlaylists = getPlaylists;
 exports.getPlaylist = getPlaylist;
 exports.createPlaylist = createPlaylist;
 exports.findUsersInGroup = findUsersInGroup;
+exports.generateSongSetIfNotExists = generateSongSetIfNotExists;

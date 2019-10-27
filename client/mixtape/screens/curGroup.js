@@ -1,4 +1,7 @@
 // Main.js
+
+//groups/groupID/invite POST
+
 import React, {Fragment} from 'react'
 import {   SafeAreaView,
            StyleSheet,
@@ -22,31 +25,62 @@ export default class groups extends React.Component {
     this.state = {
       groupID: '',
       name: 'Name',
-      mood: 'Mood',
       isLiked: false,
       isDisliked: false,
-      song: 'Faded',
-      artist: 'Alan Walker',
-      artURL: 'https://i.scdn.co/image/ab67616d0000b273c4d00cac55ae1b4598c9bc90'
+      song: 'Not Playing',
+      artist: '',
+      artURL: ''
     }
   }
 
-  static navigationOptions = {
-    title: 'Group',
-    headerStyle: {
-      backgroundColor: '#2F2F2F',
-      borderBottomColor: 'transparent',
-    },
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title:'Groups',
+      headerStyle: {
+        height: 60,
+        backgroundColor: '#2F2F2F',
+        borderBottomColor: 'transparent',
+      },
+      headerRight: () => (
+        <View style={{marginTop: 10, marginRight: 15}}>
+          <TouchableOpacity onPress={navigation.getParam('invite')}>
+            <Icon name='envelope' type={'evilicon'} size={40} color={"#007bff"}/>
+          </TouchableOpacity>
+        </View>
+      ),
+    };
   };
 
   componentDidMount() {
-    var id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
-    this.setState({groupID: id})
-    /*fetch('http://localhost:3000/groups')
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch(error => console.log(error.message));*/
+    const _id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
+    this.setState({groupID: _id});
+    this.props.navigation.setParams({ invite: this._invite });
+    this.timer = setInterval(()=> this.getTrack(), 3000);
   }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
+  getTrack() {
+    fetch('http://localhost:3000/users/me/current')
+      .then((response) => response.json())
+      .then((data) => {
+        let parseData = JSON.parse(data);
+        this.setState({
+          song: parseData.item.name,
+          artist: parseData.item.artists[0].name,
+          artUrl: parseData.item.album.images[0].url,
+        });
+      })
+      .catch(error => {
+        //console.log(error.message)
+      });
+  }
+
+  _invite = () => {
+    this.props.navigation.navigate('AddMembers', {id: this.state.groupID})
+  };
 
   addSong() {
     //adds song to library for the given user
@@ -90,7 +124,7 @@ export default class groups extends React.Component {
         <SafeAreaView>
           <View style={styles.container}>
             <Image
-              source={{uri: 'https://i.scdn.co/image/ab67616d0000b273c4d00cac55ae1b4598c9bc90'}}
+              source={{uri: this.state.artUrl}}
               style={styles.albumArt}
               resizeMode={"contain"}
             />
@@ -140,6 +174,7 @@ const styles = StyleSheet.create({
   albumArt: {
     width: Dimensions.get('window').width - MARGIN * 2,
     height: Dimensions.get('window').width - MARGIN * 2,
+    backgroundColor: '#242424'
   },
   song: {
     fontSize: 25,

@@ -8,6 +8,7 @@ import login from './screens/login'
 import groups from './screens/groups'
 import curGroup from './screens/curGroup'
 import newGroup from './screens/newGroup'
+import addMembers from './screens/addMembers'
 
 import global from './style/global'
 
@@ -22,11 +23,11 @@ const MainStack = createStackNavigator( {
     Groups: {
       screen: groups,
     },
-    NewGroup: {
-      screen: newGroup,
-    },
     CurGroup: {
       screen: curGroup,
+    },
+    AddMembers: {
+      screen: addMembers,
     }
   },
   {

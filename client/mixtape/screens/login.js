@@ -5,8 +5,9 @@ import {    SafeAreaView,
             StatusBar,
             Text,
             View ,
-            Button,
+            TouchableOpacity,
             Linking,} from 'react-native'
+import global from '../style/global'
 
 export default class login extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class login extends React.Component {
     this.state = {
       CLIENT_ID: '1eaa04d6551348fa84e7966990e45aeb',
       redirectUrl: 'mixtape://',
-      authcode: null
+      authcode: null,
     }
   }
 
@@ -28,7 +29,7 @@ export default class login extends React.Component {
 
   spotifyAuth() {
     Linking.openURL(
-      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email&response_type=code`)
+      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email,user-read-private,user-read-currently-playing,user-read-playback-state,user-top-read,user-modify-playback-state,playlist-modify-private,playlist-modify-public,playlist-read-collaborative,playlist-read-private&response_type=token`)
       .catch((err) => console.error('An error occurred', err));
   }
 
@@ -39,8 +40,8 @@ export default class login extends React.Component {
     Linking.removeEventListener('url', this._handleOpenURL.bind(this));
   }
   _handleOpenURL(event) {
-    var code = event.url.split("code=")[1];
-    fetch('http://localhost:3000/users/auth/spotify/authorize?code=' + code)
+    let token = event.url.split("access_token=")[1];
+    fetch('http://localhost:3000/users/auth/spotify/authorize?token=' + token)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .then(() => this.props.navigation.navigate('Main'))
@@ -49,13 +50,13 @@ export default class login extends React.Component {
 
   render() {
     return (
-      <SafeAreaView>
-        <View>
-          <Button title="login" onPress={this.spotifyAuth.bind(this)}>
-            <Text>Click Me</Text>
-          </Button>
-        </View>
-      </SafeAreaView>
+      <View style={[global.container, styles.container]}>
+        <SafeAreaView>
+          <TouchableOpacity style={styles.loginButton} onPress={this.spotifyAuth.bind(this)}>
+            <Text style={styles.loginText}>LOGIN TO SPOTIFY</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </View>
     );
   }
 }
@@ -63,13 +64,19 @@ export default class login extends React.Component {
 
 
 const styles = StyleSheet.create({
-  body: {
-    backgroundColor: '#FFFFFF',
-  },
   loginButton: {
-
+    backgroundColor: '#1DB954',
+    borderRadius: 100,
   },
   loginText: {
-
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 15,
+    marginHorizontal: 40,
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

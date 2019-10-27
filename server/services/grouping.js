@@ -36,6 +36,7 @@ const getValues = (user, done) => {
         // userArtists.push(artist);
       }
       /* console.log(userArtists);
+
           console.log(userTracks); */
 
       const finished = { artist: userArtists, tracks: userTracks, genres };
