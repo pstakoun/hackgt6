@@ -24,6 +24,9 @@ export default class newGroup extends React.Component {
     title: 'New Group'
   };
 
+  componentDidMount() {
+
+  }
 
   //makes the group given the criteria
   makeGroup() {

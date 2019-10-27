@@ -1,4 +1,7 @@
 // Main.js
+
+//groups/groupID/invite POST
+
 import React, {Fragment} from 'react'
 import {   SafeAreaView,
            StyleSheet,
@@ -31,22 +34,41 @@ export default class groups extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    title: 'Group',
-    headerStyle: {
-      backgroundColor: '#2F2F2F',
-      borderBottomColor: 'transparent',
-    },
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title:'Groups',
+      headerStyle: {
+        height: 60,
+        backgroundColor: '#2F2F2F',
+        borderBottomColor: 'transparent',
+      },
+      headerRight: () => (
+        <Button
+          onPress={navigation.getParam('invite')}
+          title="Invite"
+          color="#007bff"
+        />
+      ),
+    };
   };
 
   componentDidMount() {
-    var id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
-    this.setState({groupID: id})
+    const _id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
+    const first = (JSON.stringify(this.props.navigation.getParam('first', false)) == 'true');
+    this.setState({groupID: _id});
+    if (first == true) {
+      this.props.navigation.navigate('AddMembers', {id: _id})
+    }
+    this.props.navigation.setParams({ invite: this._invite });
     /*fetch('http://localhost:3000/groups')
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch(error => console.log(error.message));*/
   }
+
+  _invite = () => {
+    this.props.navigation.navigate('AddMembers', {id: this.state.groupID})
+  };
 
   addSong() {
     //adds song to library for the given user
