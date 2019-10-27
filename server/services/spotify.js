@@ -3,7 +3,7 @@ const database = require('../services/database');
 
 const clientId = '1eaa04d6551348fa84e7966990e45aeb';
 const clientSecret = '77f351092ac34ba7af26b9311be33c16';
-const redirectUri = 'http://localhost:3000/users/auth/spotify/callback';
+const redirectUri = 'mixtape://';
 
 const getToken = (user, done) => {
   if (user.spotifyAccessToken) {

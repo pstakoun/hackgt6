@@ -29,7 +29,7 @@ export default class login extends React.Component {
 
   spotifyAuth() {
     Linking.openURL(
-      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email&response_type=code`)
+      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email&response_type=token`)
       .catch((err) => console.error('An error occurred', err));
   }
 
@@ -40,8 +40,8 @@ export default class login extends React.Component {
     Linking.removeEventListener('url', this._handleOpenURL.bind(this));
   }
   _handleOpenURL(event) {
-    var code = event.url.split("code=")[1];
-    fetch('http://localhost:3000/users/auth/spotify/authorize?code=' + code)
+    let token = event.url.split("access_token=")[1];
+    fetch('http://localhost:3000/users/auth/spotify/authorize?token=' + token)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .then(() => this.props.navigation.navigate('Main'))
