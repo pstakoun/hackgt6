@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+const spotify = require('./spotify');
 const User = require('../models/user');
 const Group = require('../models/group');
 const Playlist = require('../models/playlist');
+const SongSet = require('../models/song-set');
 
 mongoose.connect('mongodb+srv://hackUser:hackpassword@cluster0-cixj1.gcp.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -112,6 +114,16 @@ const findUsersInGroup = (groupId, done) => {
   });
 };
 
+const generateSongSetIfNotExists = (user) => {
+  SongSet.find({ user: user._id }, (err, doc) => {
+    if (doc === []) {
+      spotify.getTopTracks(user, { limit: 50 }, (err, result) => {
+        SongSet.create({ date: new Date(), user, songs: result.items });
+      });
+    }
+  });
+};
+
 exports.getUser = getUser;
 exports.getUserSpotify = getUserSpotify;
 exports.createUser = createUser;
@@ -125,3 +137,4 @@ exports.getPlaylists = getPlaylists;
 exports.getPlaylist = getPlaylist;
 exports.createPlaylist = createPlaylist;
 exports.findUsersInGroup = findUsersInGroup;
+exports.generateSongSetIfNotExists = generateSongSetIfNotExists;

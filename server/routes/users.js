@@ -21,6 +21,7 @@ passport.use(
           database.createUserSpotify(profile, done);
         } else {
           database.updateUserTokensSpotify(profile, accessToken, refreshToken, (err, res) => {
+            database.generateSongSetIfNotExists(user);
             done(err, user);
           });
         }
