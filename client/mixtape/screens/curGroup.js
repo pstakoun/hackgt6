@@ -66,12 +66,12 @@ export default class groups extends React.Component {
 
   startPlaylist() {
     console.log(this.state.groupID);
-    fetch(`http://localhost:3000/groups/${this.state.groupID}/playlists`)
+    fetch(`http://mixtape.fratstar.org/groups/${this.state.groupID}/playlists`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        this.setState({playlistID: data[0]._id}, () => {
-          fetch(`http://localhost:3000/groups/${this.state.groupID}/playlists/${this.state.playlistID}/play`, {
+        this.setState({playlistID: data[data.length - 1]._id}, () => {
+          fetch(`http://mixtape.fratstar.org/groups/${this.state.groupID}/playlists/${this.state.playlistID}/play`, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -92,7 +92,7 @@ export default class groups extends React.Component {
   }
 
   getTrack() {
-    fetch('http://localhost:3000/users/me/current')
+    fetch('http://mixtape.fratstar.org/users/me/current')
       .then((response) => response.json())
       .then((data) => {
         let parseData = JSON.parse(data);
@@ -112,7 +112,7 @@ export default class groups extends React.Component {
   };
 
   addSong() {
-    fetch('http://localhost:3000/users/me/current/save', {
+    fetch('http://mixtape.fratstar.org/users/me/current/save', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -152,7 +152,7 @@ export default class groups extends React.Component {
         isLiked: false,
         isDisliked: true,
       });
-      fetch('http://localhost:3000/users/me/skip', {
+      fetch('http://mixtape.fratstar.org/users/me/skip', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
