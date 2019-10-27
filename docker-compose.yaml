@@ -4,3 +4,7 @@ services:
     build: sms/
     ports:
       - "50051:50051"
+  server:
+    build: server/
+    ports:
+      - "3000:3000"
