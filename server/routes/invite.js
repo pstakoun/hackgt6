@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const phone = require('phone');
 const sms = require('../grpc/sms_client');
 const database = require('../services/database');
@@ -20,8 +21,7 @@ router.post('/', (req, res) => {
     res.status(400).json({ error: 'Request body missing phone numbers.' });
   } else {
     const phoneNumbers = JSON.parse(req.body.phoneNumbers).filter((s) => phone(s)).map((s) => phone(s)[0]);
-    sms.createGroupInvite('You have been invited to join Mixtape! Access your account now at: ',
-      JSON.parse(req.body.phoneNumbers)).then((responses) => {
+    sms.createGroupInvite('You have been invited to join Mixtape! Access your account now at: ', phoneNumbers).then((responses) => {
       for (const response of responses) {
         invites[response.getTokenId()] = {
           phoneNumber: response.getPhoneNumber(),
@@ -43,13 +43,8 @@ router.get('/join/:token', (req, res) => {
   if (!invites[req.params.token]) {
     res.status(404).send({ message: 'Invalid token' });
   } else {
-    const invite = invites[req.params.token];
-    database.createUser({ groups: [invite.group] }, (err, user) => {
-      req.login(user, (err) => {
-        if (err) { return next(err); }
-        return res.redirect('/users/auth/spotify');
-      });
-    });
+    req.session.inviteGroup = invites[req.params.token].group;
+    return res.redirect('/users/auth/spotify');
   }
 });
 

@@ -6,7 +6,6 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 const bodyParser = require('body-parser');
 const database = require('../services/database');
 const spotify = require('../services/spotify');
-
 const grouping = require('../services/grouping');
 
 passport.use(
@@ -60,9 +59,18 @@ router.get('/auth/spotify', passport.authenticate('spotify',
 });
 
 router.get('/auth/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/users/auth/spotify' }), (req, res) => {
-  database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
-    res.redirect('/users/me');
-  });
+  if (req.session.inviteGroup) {
+    database.addUserToGroup(req.user.id, req.session.inviteGroup, (err, result) => {
+      req.session.inviteGroup = null;
+      database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
+        res.redirect('/users/me');
+      });
+    });
+  } else {
+    database.setUserSpotifyAuthCode(req.user.id, req.query.code, (err, user) => {
+      res.redirect('/users/me');
+    });
+  }
 });
 
 router.get('/auth/spotify/authorize', (req, res) => {

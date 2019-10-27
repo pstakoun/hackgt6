@@ -63,7 +63,6 @@ const getTopArtists = (user, options, done) => {
   });
 };
 
-
 const getRecommendations = (user, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
