@@ -162,9 +162,9 @@ const playPlaylist = (user, id, done) => {
   });
 };
 
-const getTrackFeat = (user, id, done) => {
+const getTrackFeats = (user, ids, done) => {
   getToken(user, (err, body) => {
-    request.get(`https://api.spotify.com/v1/audio-features/?${id}`, {
+    request.get(`https://api.spotify.com/v1/audio-features?ids=${ids.join(',')}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
       },
@@ -224,4 +224,4 @@ exports.createPlaylist = createPlaylist;
 exports.addToPlaylist = addToPlaylist;
 exports.getRecommendations = getRecommendations;
 exports.getArtistTracks = getArtistTracks;
-exports.getTrackFeat = getTrackFeat;
+exports.getTrackFeats = getTrackFeats;

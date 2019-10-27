@@ -90,9 +90,11 @@ router.post('/:group/playlists', (req, res) => {
   }
 });
 
-router.post('/:group/groupIdentity', (req, res) => {
-  
-}
+router.get('/:group/groupIdentity', (req, res) => {
+  grouping.getGroupAverage(req.user, req.params.group, (group) => {
+    res.json(group);
+  });
+});
 
 router.post('/:group/playlists/:playlist/play', (req, res) => {
   if (!req.user) {
