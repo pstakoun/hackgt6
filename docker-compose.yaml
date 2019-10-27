@@ -1,6 +1,12 @@
 version: '3'
 services:
   sms:
-    build: sms/
+    image: gcr.io/apesounds/sms
     ports:
       - "50051:50051"
+  server:
+    image: gcr.io/apesounds/server
+    labels:
+      kompose.service.expose: "true"
+    ports:
+      - "3000:3000"
