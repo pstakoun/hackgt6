@@ -6,8 +6,8 @@ let client;
 
 function initGRPC() {
   try {
-    console.log('Attempting to connect to sms.default.svc.cluster.local:50051');
-    client = new services.SMSServiceClient('sms.default.svc.cluster.local:50051',
+    console.log('Attempting to connect to 50051');
+    client = new services.SMSServiceClient('127.0.0.1:50051',
       grpc.credentials.createInsecure());
     console.log('connected');
   } catch (e) {
