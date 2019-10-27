@@ -29,7 +29,7 @@ export default class login extends React.Component {
 
   spotifyAuth() {
     Linking.openURL(
-      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email&response_type=token`)
+      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email,user-read-private,user-read-currently-playing,user-read-playback-state,user-top-read,user-modify-playback-state,playlist-modify-private,playlist-modify-public,playlist-read-collaborative,playlist-read-private&response_type=token`)
       .catch((err) => console.error('An error occurred', err));
   }
 
