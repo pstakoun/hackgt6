@@ -55,18 +55,18 @@ const getLibParams = (user, done) => {
 //todo ^MAKE WORK
 
 const buildAverage = (user, songIds, out) => {
-      spotify.getTrackFeat(user, songIds, arrayC => {
-        let array = arrayC.audio_features;
+      spotify.getTrackFeats(user, songIds, (err, arrayC) => {
+        let array = JSON.parse(arrayC).audio_features;
         let info = {
-           danceability: array.reduce((a,b) => a.danceability + b.danceability, 0) / array.length,
-           energy: array.reduce((a,b) => a.energy + b.energy, 0) / array.length,
-           loudness: array.reduce((a,b) => a.loudness + b.loudness, 0) / array.length,
-           speechiness: array.reduce((a,b) => a.speechiness + b.speechiness, 0) / array.length,
-           acousticness: array.reduce((a,b) => a.acousticness + b.acousticness, 0) / array.length,
-           instrumentalness: array.reduce((a,b) => a.instrumentalness + b.instrumentalness, 0) / array.length,
-           liveness: array.reduce((a,b) => a.liveness + b.liveness, 0) / array.length,
-           valence: array.reduce((a,b) => a.valence + b.valence, 0) / array.length,
-           tempo: array.reduce((a,b) => a.tempo + b.tempo, 0) / array.length
+           danceability: array.reduce((a,b) => a + b.danceability, 0) / array.length,
+           energy: array.reduce((a,b) => a + b.energy, 0) / array.length,
+           loudness: array.reduce((a,b) => a + b.loudness, 0) / array.length,
+           speechiness: array.reduce((a,b) => a + b.speechiness, 0) / array.length,
+           acousticness: array.reduce((a,b) => a + b.acousticness, 0) / array.length,
+           instrumentalness: array.reduce((a,b) => a + b.instrumentalness, 0) / array.length,
+           liveness: array.reduce((a,b) => a + b.liveness, 0) / array.length,
+           valence: array.reduce((a,b) => a + b.valence, 0) / array.length,
+           tempo: array.reduce((a,b) => a + b.tempo, 0) / array.length
         };
         out(info);
       });
@@ -89,7 +89,7 @@ const getGroupAverage = (user, groupId, done) => {
      var count = 0;
     users.forEach((user) => {
       getValues(user, (err, prof) => {
-        buildAverage(user, prof.tracks,  (err, body) => {
+        buildAverage(user, prof.tracks,  (body) => {
           group.danceability += body.danceability /users.length;
           group.energy += body.energy /users.length;
           group.loudness += body.loudness /users.length;
@@ -99,10 +99,10 @@ const getGroupAverage = (user, groupId, done) => {
           group.liveness += body.liveness /users.length;
           group.valence += body.valence /users.length;
           group.tempo += body.tempo /users.length;
+        count++;
         if (count === users.length) {
           done(group);
         }
-        count++;
     });
   });
 });
