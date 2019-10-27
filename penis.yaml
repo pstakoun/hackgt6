@@ -23,7 +23,7 @@ spec:
         io.kompose.service: server
     spec:
       containers:
-        - image: gcr.io/apesounds/server
+        - image: gcr.io/apesounds/server:v2
           name: server
           imagePullPolicy: Always
           ports:

@@ -3,8 +3,12 @@ const session = require('express-session');
 const phone = require('phone');
 const sms = require('../grpc/sms_client');
 const database = require('../services/database');
+const bodyParser = require('body-parser');
 
 const router = express.Router();
+
+router.use(bodyParser.json()); // support json encoded bodies
+router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // This is temporary
 // #hackathon lyfe
@@ -22,7 +26,7 @@ router.post('/', (req, res) => {
   } else {
     // const phoneNumbers = req.body.phoneNumbers.filter((s) => phone(s)).map((s) => phone(s)[0]);
     console.log(req.body.phoneNumbers);
-    sms.createGroupInvite('You have been invited to join Mixtape! Access your account now at: ', JSON.parse(req.body.phoneNumbers)).then((responses) => {
+    sms.createGroupInvite('You have been invited to join Mixtape! Access your account now at: ', req.body.phoneNumbers).then((responses) => {
       for (const response of responses) {
         invites[response.getTokenId()] = {
           phoneNumber: response.getPhoneNumber(),
