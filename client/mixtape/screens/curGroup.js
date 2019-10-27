@@ -60,10 +60,33 @@ export default class groups extends React.Component {
       this.props.navigation.navigate('AddMembers', {id: _id})
     }
     this.props.navigation.setParams({ invite: this._invite });
-    /*fetch('http://localhost:3000/groups')
+    fetch('http://localhost:3000/users/me/current')
       .then((response) => response.json())
       .then((data) => console.log(data))
-      .catch(error => console.log(error.message));*/
+      .catch(error => console.log(error.message));
+
+    this.getTrack();
+  }
+
+  getTrack() {
+    this.timeout(300000, fetch('http://localhost:3000/users/me/current'))
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+
+      })
+      .catch(error => {
+        console.log(error.message)
+      });
+  }
+
+  timeout(ms, promise) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        reject(new Error("timeout"))
+      }, ms);
+      promise.then(resolve, reject)
+    })
   }
 
   _invite = () => {

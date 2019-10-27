@@ -32,10 +32,6 @@ export default class groups extends React.Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:3000/groups')
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch(error => console.log(error.message));
     this.props.navigation.setParams({ makeGroup: this._makeGroup });
     this.getGroups();
   }
@@ -66,8 +62,6 @@ export default class groups extends React.Component {
       .then((response) => response.json())
       .then((data) => this.setState({groups: data}))
       .catch(error => console.log(error.message));
-    console.log("This one");
-    console.log(this.state.groups)
   }
 
   render() {
