@@ -7,7 +7,7 @@ let client;
 function initGRPC() {
   try {
     console.log('Attempting to connect to 50051');
-    client = new services.SMSServiceClient('127.0.0.1:50051',
+    client = new services.SMSServiceClient('localhost:50051',
       grpc.credentials.createInsecure());
     console.log('connected');
   } catch (e) {
