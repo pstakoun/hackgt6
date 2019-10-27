@@ -41,11 +41,11 @@ export default class groups extends React.Component {
     Alert.prompt(
       'Create Group', null, (text) => {
         if (text.length > 0) {
-          fetch('http://localhost:3000/users/me')
+          fetch('http://mixtape.fratstar.org/users/me')
             .then((response) => response.json())
             .then((d) => {
               console.log(d);
-              fetch('http://localhost:3000/groups', {
+              fetch('http://mixtape.fratstar.org/groups', {
                 method: 'POST',
                 headers: {
                   Accept: 'application/json',
@@ -56,7 +56,7 @@ export default class groups extends React.Component {
               })
                 .then((response) => response.json())
                 .then((groupdata) => {
-                  fetch('http://localhost:3000/groups/' + groupdata._id + '/playlists', {
+                  fetch('http://mixtape.fratstar.org/groups/' + groupdata._id + '/playlists', {
                     method: 'POST',
                     headers: {
                       Accept: 'application/json',

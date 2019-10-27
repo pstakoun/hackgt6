@@ -30,7 +30,7 @@ export default class newGroup extends React.Component {
 
   //makes the group given the criteria
   makeGroup() {
-    fetch('http://localhost:3000/groups', {
+    fetch('http://mixtape.fratstar.org/groups', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
