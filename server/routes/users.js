@@ -144,6 +144,16 @@ router.post('/me/current/save', (req, res) => {
   }
 });
 
+router.post('/me/skip', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.skipTrack(req.user, (err, body) => {
+      res.json(body);
+    });
+  }
+});
+
 // For testing
 router.get('/me/top/artists', (req, res) => {
   if (!req.user) {

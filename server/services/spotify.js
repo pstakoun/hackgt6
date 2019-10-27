@@ -50,6 +50,18 @@ const getCurrentTrack = (user, done) => {
   });
 };
 
+const skipTrack = (user, done) => {
+  getToken(user, (err, body) => {
+    request.post('https://api.spotify.com/v1/me/player/next', {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+
 const saveTrack = (user, track, done) => {
   getToken(user, (err, body) => {
     request.put(`https://api.spotify.com/v1/me/tracks?ids=${track}`, {
@@ -176,6 +188,7 @@ const playPlaylist = (user, id, done) => {
 exports.getMe = getMe;
 exports.getCurrentTrack = getCurrentTrack;
 exports.saveTrack = saveTrack;
+exports.skipTrack = skipTrack;
 exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;
 exports.getGroupTracks = getGroupTracks;
