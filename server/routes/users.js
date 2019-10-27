@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
@@ -80,8 +79,16 @@ router.get('/auth/spotify/authorize', (req, res) => {
       res.json(user);
     });
   } else {
-    database.createUserSpotify({}, (err, user) => {
-      database.setUserSpotifyAuthCode(user.id, req.query.code, (err, result) => {
+    database.createUser({ spotifyAccessToken: req.query.token }, (err, user) => {
+      req.login(user, (err) => {
+        if (err) {
+          console.log(err);
+          res.send('Error');
+        } else {
+          res.json(user);
+        }
+      });
+      /*database.setUserSpotifyAuthCode(user.id, req.query.code, (err, result) => {
         req.login(user, (err) => {
           if (err) {
             console.log(err);
@@ -90,7 +97,7 @@ router.get('/auth/spotify/authorize', (req, res) => {
             res.json(user);
           }
         });
-      });
+      });*/
     });
   }
 });
