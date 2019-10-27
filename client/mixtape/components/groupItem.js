@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
   },
 
   itemName: {
-    fontSize: 23,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '400',
   },
 
   itemNote: {

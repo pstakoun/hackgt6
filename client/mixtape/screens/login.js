@@ -2,7 +2,7 @@
 import React, {Fragment} from 'react'
 import {    SafeAreaView,
             StyleSheet,
-            StatusBar,
+            Image,
             Text,
             View ,
             TouchableOpacity,
@@ -29,7 +29,7 @@ export default class login extends React.Component {
 
   spotifyAuth() {
     Linking.openURL(
-      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email,user-read-private,user-read-currently-playing,user-read-playback-state,user-top-read,user-modify-playback-state,playlist-modify-private,playlist-modify-public,playlist-read-collaborative,playlist-read-private&response_type=token`)
+      `https://accounts.spotify.com/authorize?client_id=${this.state.CLIENT_ID}&redirect_uri=${encodeURIComponent(this.state.redirectUrl)}&scope=user-read-email,user-read-private,user-read-currently-playing,user-read-playback-state,user-top-read,user-modify-playback-state,playlist-modify-private,playlist-modify-public,playlist-read-collaborative,playlist-read-private,user-library-modify&response_type=token`)
       .catch((err) => console.error('An error occurred', err));
   }
 
@@ -52,8 +52,12 @@ export default class login extends React.Component {
     return (
       <View style={[global.container, styles.container]}>
         <SafeAreaView>
+          <View style={[styles.container, {marginBottom: 150}]}>
+            <Image style={{aspectRatio: 1.7, height: 100}} source={require('../logo.png')} />
+            <Text style={styles.logo}>MIXTAPE</Text>
+          </View>
           <TouchableOpacity style={styles.loginButton} onPress={this.spotifyAuth.bind(this)}>
-            <Text style={styles.loginText}>LOGIN TO SPOTIFY</Text>
+            <Text style={styles.loginText}>LOGIN WITH SPOTIFY</Text>
           </TouchableOpacity>
         </SafeAreaView>
       </View>
@@ -78,5 +82,9 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  logo: {
+    fontSize: 43,
+    color: 'white'
   }
 });
