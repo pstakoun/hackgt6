@@ -54,39 +54,28 @@ export default class groups extends React.Component {
 
   componentDidMount() {
     const _id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
-    const first = (JSON.stringify(this.props.navigation.getParam('first', false)) == 'true');
     this.setState({groupID: _id});
-    if (first == true) {
-      this.props.navigation.navigate('AddMembers', {id: _id})
-    }
     this.props.navigation.setParams({ invite: this._invite });
     fetch('http://localhost:3000/users/me/current')
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch(error => console.log(error.message));
+    this.timer = setInterval(()=> this.getTrack(), 3000);
+  }
 
-    this.getTrack();
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   getTrack() {
-    this.timeout(300000, fetch('http://localhost:3000/users/me/current'))
+    fetch('http://localhost:3000/users/me/current')
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-
       })
       .catch(error => {
-        console.log(error.message)
+        //console.log(error.message)
       });
-  }
-
-  timeout(ms, promise) {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function() {
-        reject(new Error("timeout"))
-      }, ms);
-      promise.then(resolve, reject)
-    })
   }
 
   _invite = () => {

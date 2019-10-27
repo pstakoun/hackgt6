@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fee39e7c-74ac-45a6-8816-e243a15bd3b3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/mixtape/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/mixtape/components/groupItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/components/groupItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/addMembers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/addMembers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/curGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/curGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/groups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/mixtape/screens/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/mixtape/screens/login.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -59,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+            <state relative-caret-position="540">
+              <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -222,8 +222,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/services/database.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        <state relative-caret-position="540">
+          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
         </state>
       </provider>
     </entry>

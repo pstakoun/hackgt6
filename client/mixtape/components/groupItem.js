@@ -15,7 +15,7 @@ export default class GroupItem extends React.Component {
 
   render() {
     return (
-      <TouchableOpacity onPress= {() => this.props.navigation.navigate('CurGroup', {id: this.props.id, first: false})}>
+      <TouchableOpacity onPress= {() => this.props.navigation.navigate('CurGroup', {id: this.props.id})}>
         <View style={[styles.itemWrapper, global.backColor]}>
           <Text style={[styles.itemName, global.fontColor]}>{this.props.name}</Text>
           <View style={styles.chevronWrapper}>
