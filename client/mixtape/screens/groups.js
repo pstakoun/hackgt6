@@ -8,6 +8,7 @@ import {
 import GropuItem from '../components/groupItem'
 import global from '../style/global'
 import GroupItem from "../components/groupItem";
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class groups extends React.Component {
   constructor(props) {
@@ -32,10 +33,6 @@ export default class groups extends React.Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:3000/groups')
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch(error => console.log(error.message));
     this.props.navigation.setParams({ makeGroup: this._makeGroup });
     this.getGroups();
   }
@@ -54,7 +51,7 @@ export default class groups extends React.Component {
             body: JSON.stringify({name: text}),
           })
             .then((response) => response.json())
-            .then((data) => this.props.navigation.navigate('CurGroup', {id: data._id, first: true}))
+            .then((data) => this.makeRoutes(data))
             .catch(error => console.log(error.message));
         }
       }
@@ -66,8 +63,18 @@ export default class groups extends React.Component {
       .then((response) => response.json())
       .then((data) => this.setState({groups: data}))
       .catch(error => console.log(error.message));
-    console.log("This one");
-    console.log(this.state.groups)
+  }
+
+  makeRoutes(data) {
+    const resetAction = StackActions.reset({
+      index: 2,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Groups' }),
+        NavigationActions.navigate({ routeName: 'CurGroup', params:{id: data._id} }),
+        NavigationActions.navigate({ routeName: 'AddMembers', params:{id: data._id} }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
   render() {

@@ -30,11 +30,11 @@ export default class addMembers extends React.Component {
     return {
       title:'Invite',
       headerRight: () => (
-        <Button
-          onPress={navigation.getParam('sendInvite')}
-          title="Send"
-          color="#007bff"
-        />
+        <View style={{marginRight: 20}}>
+          <TouchableOpacity onPress={navigation.getParam('invite')}>
+            <Icon name='paper-plane' type={'font-awesome'} size={23} color={"#007bff"}/>
+          </TouchableOpacity>
+        </View>
       ),
     };
   };
@@ -42,6 +42,7 @@ export default class addMembers extends React.Component {
   componentDidMount() {
     let _id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
     this.setState({groupID: _id});
+    console.log(_id);
     this.props.navigation.setParams({ sendInvite: this._sendInvite });
     /*fetch('http://localhost:3000/groups')
       .then((response) => response.json())
