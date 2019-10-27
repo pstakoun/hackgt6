@@ -55,6 +55,7 @@ router.get('/auth/spotify', passport.authenticate('spotify',
       'playlist-modify-public',
       'playlist-read-collaborative',
       'playlist-read-private',
+      'user-library-modify',
     ],
   }), (req, res) => {
 });
@@ -136,7 +137,7 @@ router.post('/me/current/save', (req, res) => {
     res.json({ error: 'Not authorized' });
   } else {
     spotify.getCurrentTrack(req.user, (err, body) => {
-      spotify.saveTrack(req.user, body.id, (err, result) => {
+      spotify.saveTrack(req.user, JSON.parse(body).item.id, (err, result) => {
         res.json(result);
       });
     });

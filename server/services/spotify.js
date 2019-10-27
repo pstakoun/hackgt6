@@ -51,7 +51,7 @@ const getCurrentTrack = (user, done) => {
 };
 
 const saveTrack = (user, track, done) => {
-  getToken(user, track, (err, body) => {
+  getToken(user, (err, body) => {
     request.put(`https://api.spotify.com/v1/me/tracks?ids=${track}`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
