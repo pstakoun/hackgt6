@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
@@ -88,7 +89,7 @@ router.get('/auth/spotify/authorize', (req, res) => {
           res.json(user);
         }
       });
-      /*database.setUserSpotifyAuthCode(user.id, req.query.code, (err, result) => {
+      /* database.setUserSpotifyAuthCode(user.id, req.query.code, (err, result) => {
         req.login(user, (err) => {
           if (err) {
             console.log(err);
@@ -97,7 +98,7 @@ router.get('/auth/spotify/authorize', (req, res) => {
             res.json(user);
           }
         });
-      });*/
+      }); */
     });
   }
 });
@@ -126,6 +127,18 @@ router.get('/me/current', (req, res) => {
   } else {
     spotify.getCurrentTrack(req.user, (err, body) => {
       res.json(body);
+    });
+  }
+});
+
+router.post('/me/current/save', (req, res) => {
+  if (!req.user) {
+    res.json({ error: 'Not authorized' });
+  } else {
+    spotify.getCurrentTrack(req.user, (err, body) => {
+      spotify.saveTrack(req.user, body.id, (err, result) => {
+        res.json(result);
+      });
     });
   }
 });
@@ -164,7 +177,7 @@ router.get('/me/values', (req, res) => {
 });
 
 // For testing
-router.post('/me/playlist/', (req, res) => {
+router.post('/me/playlist', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
   } else {
