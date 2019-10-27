@@ -1,5 +1,5 @@
 #!/bin/bash
-./build_docker.bash
+bash build_docker.sh
 
 kubectl get pod | grep 'server' | cut -d " " -f1 - | xargs -n1 -P 10 kubectl delete pod
 kubectl get pod | grep 'sms' | cut -d " " -f1 - | xargs -n1 -P 10 kubectl delete pod
