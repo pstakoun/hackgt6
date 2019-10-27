@@ -6,7 +6,8 @@ let client;
 
 function initGRPC() {
   try {
-    client = new services.SMSServiceClient('127.0.0.1:50051',
+    console.log('Attempting to connect to sms.default.svc.cluster.local:50051');
+    client = new services.SMSServiceClient('sms.default.svc.cluster.local:50051',
       grpc.credentials.createInsecure());
     console.log('connected');
   } catch (e) {
@@ -24,6 +25,7 @@ function createGroupInvite(messageBodyContent, phoneNumberList) {
   const request = new messages.GroupInvite();
   request.setInvitePhoneNumList(phoneNumberList);
   request.setBody(messageBodyContent);
+  console.log('creating request');
   return new Promise((resolve, reject) => {
     client.createGroupInvite(request, (err, response) => {
       // right now the response is not being handled.
@@ -32,7 +34,12 @@ function createGroupInvite(messageBodyContent, phoneNumberList) {
         console.error(err);
         reject(err);
       }
-      resolve(response.getInvitesList());
+      if (response) {
+        resolve(response.getInvitesList());
+      } else {
+        console.error('No response from GRPC');
+        reject(new Error('No GRPC response'));
+      }
     });
   });
 }

@@ -20,8 +20,9 @@ router.post('/', (req, res) => {
   } else if (!req.body.phoneNumbers) {
     res.status(400).json({ error: 'Request body missing phone numbers.' });
   } else {
-    const phoneNumbers = JSON.parse(req.body.phoneNumbers).filter((s) => phone(s)).map((s) => phone(s)[0]);
-    sms.createGroupInvite('You have been invited to join Mixtape! Access your account now at: ', phoneNumbers).then((responses) => {
+    // const phoneNumbers = req.body.phoneNumbers.filter((s) => phone(s)).map((s) => phone(s)[0]);
+    console.log(req.body.phoneNumbers);
+    sms.createGroupInvite('You have been invited to join Mixtape! Access your account now at: ', JSON.parse(req.body.phoneNumbers)).then((responses) => {
       for (const response of responses) {
         invites[response.getTokenId()] = {
           phoneNumber: response.getPhoneNumber(),
@@ -31,7 +32,7 @@ router.post('/', (req, res) => {
         };
       }
       res.status(200).json({ message: responses });
-    });
+    }).catch((err) => res.status(500).json({ message: err }));
   }
 });
 
