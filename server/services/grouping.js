@@ -38,7 +38,7 @@ const getValues = (user, done) => {
       /* console.log(userArtists);
           console.log(userTracks); */
 
-      const finished = { artists: userArtists, tracks: userTracks, genres };
+      const finished = { artist: userArtists, tracks: userTracks, genres };
       done(err, finished);
     });
   });
@@ -47,13 +47,13 @@ const getValues = (user, done) => {
 const getIndividualOverlap = (groupArr, done) => {
     let total = groupArr[0];
     let mapping = {};
-    for(var i = 1; i < group.length - 1; i++) {
+    for(var i = 1; i < groupArr.length; i++) {
        total = total.filter(x => groupArr[i].includes(x));
-         for(let val in total){
-           if (mapping.contains(val)) {
-              mapping[val]++;
+         for (let val in total) {
+           if (!mapping[val]) {
+             mapping[val] = 1;
            } else {
-              mapping[val] = 1;
+              mapping[val]++;
            }
          }
     }
@@ -63,28 +63,36 @@ const getIndividualOverlap = (groupArr, done) => {
 
 
 
-
-const getOverlap = (group, done) => {
-  database.findUsersInGroup(group._id, (err, users) => {
-    const profiles = []
+const getOverlap = (groupId, done) => {
+  database.findUsersInGroup(groupId, (err, users) => {
+    const genres = [];
+    const tracks = [];
+    const artist = [];
      users.forEach((user) => {
       getValues(user, (err, prof) => {
-          profiles.push(prof);
-          if (profiles.length === users.length) {
-            profiles.push(peter);
+          genres.push(prof.genres);
+          tracks.push(prof.tracks);
+          artist.push(prof.artist);
+          if (genres.length === users.length) {
+            //profiles.push(peter);
+            genres.push(peter.genres);
+            tracks.push(peter.tracks);
+            artist.push(peter.artist);
 
+            console.log(genres);
             const out = {};
-            getIndividualOverlap(profiles[genres], (map, lap) => {
-              out[genres] = map;
-              getIndividualOverlap(profiles[artist], (map, lap) => {
-                out[genres] = map;
-                getIndividualOverlap(profiles[tracks], (map, lap) => {
-                  out[tracks] = map;
-                  out[tracksAdd] = lap
+            getIndividualOverlap(genres, (map, lap) => {
+              out.genres = lap;
+              getIndividualOverlap(artist, (map2, lap) => {
+                out.artists = lap;
+                getIndividualOverlap(tracks, (map3, lap4) => {
+                  //out.tracks = map3;
+                  out.tracks = lap4
+                  //console.log(out);
                   done(err, out);
-                };
-              };
-            };
+                });
+              });
+            });
             //const finished = { artists: userArtists, tracks: userTracks, genres };
           };
         });
@@ -93,13 +101,5 @@ const getOverlap = (group, done) => {
 };
 
 
-
-
-const getGrouping = (group, done) => {
-  opt = {"}; //priority queue on data from getOverlap
-  getOverlap(group, out => {
-
-  });
-}; //return an opt and a list of tracks.
-
 exports.getValues = getValues;
+exports.getOverlap = getOverlap;

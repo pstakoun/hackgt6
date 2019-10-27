@@ -103,6 +103,7 @@ const getTopTracks = (user, options, done) => {
         Authorization: `Bearer ${body.access_token}`,
       },
     }, (err, res, body) => {
+      console.log(JSON.parse(body).total);
       done(err, body);
     });
   });

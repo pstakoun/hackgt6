@@ -1,6 +1,7 @@
 const express = require('express');
 const database = require('../services/database');
 const spotify = require('../services/spotify');
+const grouping = require('../services/grouping');
 
 const router = express.Router();
 
@@ -93,6 +94,13 @@ router.post('/:group/playlists/:playlist/play', (req, res) => {
   }
 });
 
+//FOR TESTING PURPOSES ONLY!
+router.get("/:group/histogram", (req, res) => {
+    grouping.getOverlap(req.params.group, (err, out) => {
+      console.log(out);
+      res.json(out);
+    });
+});
 
 
 module.exports = router;
