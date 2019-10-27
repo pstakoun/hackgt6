@@ -38,6 +38,18 @@ const getMe = (user, done) => {
   });
 };
 
+const getCurrentTrack = (user, done) => {
+  getToken(user, (err, body) => {
+    request.get('https://api.spotify.com/v1/me/player/currently-playing', {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+
 const getTopArtists = (user, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
@@ -134,7 +146,6 @@ const getGroupArtists = (user, groupId, done) => {
   });
 };
 
-
 const playPlaylist = (user, id, done) => {
   getToken(user, (err, body) => {
     request.put('https://api.spotify.com/v1/me/player/play', {
@@ -152,6 +163,7 @@ const playPlaylist = (user, id, done) => {
 
 
 exports.getMe = getMe;
+exports.getCurrentTrack = getCurrentTrack;
 exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;
 exports.getGroupTracks = getGroupTracks;
