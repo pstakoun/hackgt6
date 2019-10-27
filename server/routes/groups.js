@@ -90,6 +90,10 @@ router.post('/:group/playlists', (req, res) => {
   }
 });
 
+router.post('/:group/groupIdentity', (req, res) => {
+  
+}
+
 router.post('/:group/playlists/:playlist/play', (req, res) => {
   if (!req.user) {
     res.json({ error: 'Not authorized' });
