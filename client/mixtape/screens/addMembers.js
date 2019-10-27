@@ -47,7 +47,7 @@ export default class addMembers extends React.Component {
   }
 
   _sendInvite = () => {
-    let url = `http://localhost:3000/invite`;
+    let url = `http://mixtape.fratstar.org/invite`;
     fetch(url, {
       method: 'POST',
       headers: {

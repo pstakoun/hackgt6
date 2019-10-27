@@ -77,7 +77,7 @@ export default class groups extends React.Component {
   };
 
   getGroups() {
-    fetch('http://localhost:3000/groups')
+    fetch('http://mixtape.fratstar.org/groups')
       .then((response) => response.json())
       .then((data) => this.setState({groups: data}))
       .catch(error => console.log(error.message));

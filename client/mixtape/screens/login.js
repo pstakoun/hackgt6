@@ -41,7 +41,7 @@ export default class login extends React.Component {
   }
   _handleOpenURL(event) {
     let token = event.url.split("access_token=")[1];
-    fetch('http://localhost:3000/users/auth/spotify/authorize?token=' + token)
+    fetch('http://mixtape.fratstar.org/users/auth/spotify/authorize?token=' + token)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .then(() => this.props.navigation.navigate('Main'))
