@@ -29,7 +29,8 @@ export default class groups extends React.Component {
       isDisliked: false,
       song: 'Not Playing',
       artist: '',
-      artURL: ''
+      artURL: '',
+      added: false,
     }
   }
 
@@ -83,7 +84,18 @@ export default class groups extends React.Component {
   };
 
   addSong() {
-    //adds song to library for the given user
+    fetch('http://localhost:3000/users/me/current/save', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      //edit this to choose what data you want in new group (the name and members are both in state)
+      body: JSON.stringify({}),
+    })
+      .then((response) => response.json())
+      .then((data) => this.setState({added: true}))
+      .catch(error => console.log(error.message));
   }
 
   updatePoll() {
@@ -111,7 +123,18 @@ export default class groups extends React.Component {
       this.setState({
         isLiked: false,
         isDisliked: true,
+      });
+      fetch('http://localhost:3000/users/me/skip', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        //edit this to choose what data you want in new group (the name and members are both in state)
+        body: JSON.stringify({}),
       })
+      .then((response) => response.json())
+      .catch(error => console.log(error.message));
     }
     this.updatePoll()
   }
@@ -140,6 +163,7 @@ export default class groups extends React.Component {
               </View>
               <TouchableOpacity
                 type="submit"
+                //disabled={this.state.added}
                 onPress={() => this.addSong()}>
                 <Text style={styles.plus}>+</Text>
               </TouchableOpacity>

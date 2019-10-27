@@ -31,7 +31,7 @@ export default class addMembers extends React.Component {
       title:'Invite',
       headerRight: () => (
         <View style={{marginRight: 20}}>
-          <TouchableOpacity onPress={navigation.getParam('invite')}>
+          <TouchableOpacity onPress={navigation.getParam('sendInvite')}>
             <Icon name='paper-plane' type={'font-awesome'} size={23} color={"#007bff"}/>
           </TouchableOpacity>
         </View>
