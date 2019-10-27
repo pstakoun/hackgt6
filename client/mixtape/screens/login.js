@@ -5,8 +5,9 @@ import {    SafeAreaView,
             StatusBar,
             Text,
             View ,
-            Button,
+            TouchableOpacity,
             Linking,} from 'react-native'
+import global from '../style/global'
 
 export default class login extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class login extends React.Component {
     this.state = {
       CLIENT_ID: '1eaa04d6551348fa84e7966990e45aeb',
       redirectUrl: 'mixtape://',
-      authcode: null
+      authcode: null,
     }
   }
 
@@ -49,13 +50,13 @@ export default class login extends React.Component {
 
   render() {
     return (
-      <SafeAreaView>
-        <View>
-          <Button title="login" onPress={this.spotifyAuth.bind(this)}>
-            <Text>Click Me</Text>
-          </Button>
-        </View>
-      </SafeAreaView>
+      <View style={[global.container, styles.container]}>
+        <SafeAreaView>
+          <TouchableOpacity style={styles.loginButton} onPress={this.spotifyAuth.bind(this)}>
+            <Text style={styles.loginText}>LOGIN TO SPOTIFY</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </View>
     );
   }
 }
@@ -63,13 +64,19 @@ export default class login extends React.Component {
 
 
 const styles = StyleSheet.create({
-  body: {
-    backgroundColor: '#FFFFFF',
-  },
   loginButton: {
-
+    backgroundColor: '#1DB954',
+    borderRadius: 100,
   },
   loginText: {
-
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 15,
+    marginHorizontal: 40,
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

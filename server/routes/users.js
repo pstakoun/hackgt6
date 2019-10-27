@@ -147,7 +147,7 @@ router.get('/me/recommendations', (req, res) => {
     res.json({ error: 'Not authorized' });
   } else {
     grouping.getValues(req.user, (err, body) => {
-      console.log(body);
+      // console.log(body);
       const opt = { seed_artists: '', seed_genres: '', seed_tracks: [] };
       for (let i = 0; i < 5; i++) {
         opt.seed_tracks.push(body.tracks[i]);

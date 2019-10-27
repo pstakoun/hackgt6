@@ -38,9 +38,20 @@ const getMe = (user, done) => {
   });
 };
 
+const getCurrentTrack = (user, done) => {
+  getToken(user, (err, body) => {
+    request.get('https://api.spotify.com/v1/me/player/currently-playing', {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+
 const getTopArtists = (user, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
-
   getToken(user, (err, body) => {
     request.get(`https://api.spotify.com/v1/me/top/artists?${opt}`, {
       headers: {
@@ -52,7 +63,6 @@ const getTopArtists = (user, options, done) => {
   });
 };
 
-
 const getRecommendations = (user, options, done) => {
   const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
   getToken(user, (err, body) => {
@@ -61,7 +71,7 @@ const getRecommendations = (user, options, done) => {
         Authorization: `Bearer ${body.access_token}`,
       },
     }, (err, res, body) => {
-      done(err, body);
+      done(err, JSON.parse(body));
     });
   });
 };
@@ -79,14 +89,14 @@ const createPlaylist = (user, options, done) => {
   });
 };
 
-
-// TODO!!
-const addToPlaylist = (group, options, done) => {
-  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
+const addToPlaylist = (user, playlist, tracks, done) => {
   getToken(user, (err, body) => {
-    request.post(`https://api.spotify.com/v1/playlists/${user.spotifyId}/playlists?${opt}`, {
+    request.post(`https://api.spotify.com/v1/playlists/${playlist}/tracks`, {
       headers: {
         Authorization: `Bearer ${body.access_token}`,
+      },
+      json: {
+        uris: tracks.map((t) => `spotify:track:${t}`),
       },
     }, (err, res, body) => {
       done(err, body);
@@ -108,19 +118,7 @@ const getTopTracks = (user, options, done) => {
     });
   });
 };
-/*
-const getRecommendations = (user, param, done) => {
-  getToken(user, (err, body) => {
-    request.get('https://api.spotify.com/v1/recommendations', {
-      headers: {
-        Authorization: `Bearer ${body.access_token}`,
-      },
-    }, (err, res, body) => {
-      done(err, body);
-    });
-  });
-};
-*/
+
 const getGroupTracks = (groupId, done) => {
   database.findUsersInGroup(groupId, (err, users) => {
     const userResults = [];
@@ -149,7 +147,6 @@ const getGroupArtists = (user, groupId, done) => {
   });
 };
 
-
 const playPlaylist = (user, id, done) => {
   getToken(user, (err, body) => {
     request.put('https://api.spotify.com/v1/me/player/play', {
@@ -165,12 +162,66 @@ const playPlaylist = (user, id, done) => {
   });
 };
 
+const getTrackFeat = (user, id, done) => {
+  getToken(user, (err, body) => {
+    request.get(`https://api.spotify.com/v1/audio-features/?${id}`, {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
 
+const getArtistTracks = (user, id, done) => {
+  getToken(user, (err, body) => {
+    request.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?${body.token}`, {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+  });
+};
+// TODO FIX THIS!
+/*
+const getTracks = (user, options, done)  => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
+  getToken(user, (err, body) => {
+    request.get(`https://api.spotify.com/v1/me/tracks/?${opt}`, {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+});
+}
+
+
+const getAllTracks = (user, done)  => {
+  const opt = Object.keys(options).map((key) => `${key}=${options[key]}`).join('&');
+  getToken(user, (err, body) => {
+    request.get(`https://api.spotify.com/v1/me/tracks/?${opt}`, {
+      headers: {
+        Authorization: `Bearer ${body.access_token}`,
+      },
+    }, (err, res, body) => {
+      done(err, body);
+    });
+});
+} */
 exports.getMe = getMe;
+exports.getCurrentTrack = getCurrentTrack;
 exports.getTopArtists = getTopArtists;
 exports.getTopTracks = getTopTracks;
 exports.getGroupTracks = getGroupTracks;
 exports.getGroupArtists = getGroupArtists;
 exports.playPlaylist = playPlaylist;
 exports.createPlaylist = createPlaylist;
+exports.addToPlaylist = addToPlaylist;
 exports.getRecommendations = getRecommendations;
+exports.getArtistTracks = getArtistTracks;
+exports.getTrackFeat = getTrackFeat;
