@@ -42,6 +42,7 @@ export default class addMembers extends React.Component {
   componentDidMount() {
     let _id = JSON.stringify(this.props.navigation.getParam('id', 'NO-ID'));
     this.setState({groupID: _id});
+    console.log(_id);
     this.props.navigation.setParams({ sendInvite: this._sendInvite });
     /*fetch('http://localhost:3000/groups')
       .then((response) => response.json())
