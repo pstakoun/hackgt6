@@ -23,9 +23,6 @@ const MainStack = createStackNavigator( {
     Groups: {
       screen: groups,
     },
-    NewGroup: {
-      screen: newGroup,
-    },
     CurGroup: {
       screen: curGroup,
     },
